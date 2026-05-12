@@ -17,3 +17,7 @@ exclude:
   - README.md
   - .github/
   - .ruby-version
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
