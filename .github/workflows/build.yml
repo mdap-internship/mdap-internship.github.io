@@ -15,14 +15,19 @@ jobs:
          contents: write  # needed for peaceiris/actions-gh-pages to push
       steps:
          - uses: actions/checkout@v4
+
          - name: Fetch intern profiles
            env:
             GH_TOKEN: ${{ secrets.ORG_PAT }}
            run: |
             python scripts/fetch_profiles.py
-         - name: Print profiles.json
-           run: cat dist/profiles.json
-
+         
+         - name: Convert markdown to HTML
+           run: |
+            sudo apt-get install -y pandoc
+            for f in dist/interns/*.md; do
+               pandoc "$f" -o "${f%.md}.html"
+            done
          - name: Deploy to Pages
            uses: peaceiris/actions-gh-pages@v3
            with:
