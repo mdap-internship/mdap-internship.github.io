@@ -20,6 +20,8 @@ jobs:
             GH_TOKEN: ${{ secrets.ORG_PAT }}
            run: |
             python scripts/fetch_profiles.py
+         - name: Print profiles.json
+           run: cat dist/profiles.json
 
          - name: Deploy to Pages
            uses: peaceiris/actions-gh-pages@v3
