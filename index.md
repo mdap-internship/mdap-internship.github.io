@@ -8,9 +8,9 @@ title: Intern Showcase
 {% for page in site.pages %}
   {% if page.path contains 'interns/' %}
     <div class="card">
-      <a href="{{ page.url }}">{{ page.name }}</a>
-      <!-- <p>{{ page.name }}</p> -->
-      <!-- <p>{{ page.tags | join: ', ' }}</p> -->
+      <a href="{{ page.url }}">{{ page.title }}</a>
+      <!-- <p>{{ page.role }}</p>
+      <p>{{ page.tags | join: ', ' }}</p> -->
     </div>
   {% endif %}
 {% endfor %}
