@@ -3,9 +3,19 @@ layout: default
 title: Intern Showcase
 ---
 
-{% assign all_cohorts = site.data.cohorts | map: "last" | group_by: "cohort" | sort: "name" | reverse %}
+{% comment %}
+cohorts.yml is a hash keyed by username.
+We convert it to an array first, then group by cohort.
+{% endcomment %}
 
-{% for cohort_group in all_cohorts %}
+{% assign interns = "" | split: "" %}
+{% for entry in site.data.cohorts %}
+{% assign interns = interns | push: entry[1] %}
+{% endfor %}
+
+{% assign grouped = interns | group_by: "cohort" | sort: "name" | reverse %}
+
+{% for cohort_group in grouped %}
 <section class="cohort">
   <h2>{{ cohort_group.name }}</h2>
   <ul class="intern-list">
