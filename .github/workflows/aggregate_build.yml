@@ -1,6 +1,8 @@
 name: Build Showcase
 
 on:
+  push:
+    branches: [main]
   repository_dispatch:
     types: [intern-updated]
   schedule:

@@ -4,3 +4,9 @@ _site/
 .jekyll-metadata
 vendor/
 Gemfile.lock
+.bundle/
+vendor/
+# CI-generated files — not committed
+interns/*
+!interns/.gitkeep
+_data/cohorts.yml
