@@ -1,18 +1,36 @@
-import requests, os, base64
+import requests, os, base64, re
 
 token = os.environ["GH_TOKEN"]
 headers = {"Authorization": f"token {token}"}
 org = "mdap-internship"
 
-os.makedirs("dist/interns", exist_ok=True)
+os.makedirs("interns", exist_ok=True)
 
-# Find all intern repos
 repos = requests.get(
     f"https://api.github.com/orgs/{org}/repos?per_page=100",
     headers=headers
 ).json()
 
 intern_repos = [r for r in repos if r["name"].startswith("intern-")]
+
+def rewrite_image_urls(content, org, repo_name, branch="main"):
+    base_url = f"https://raw.githubusercontent.com/{org}/{repo_name}/{branch}"
+    
+    # Rewrite markdown images: ![alt](relative/path.jpg)
+    content = re.sub(
+        r'!\[([^\]]*)\]\((?!http)([^)]+)\)',
+        lambda m: f'![{m.group(1)}]({base_url}/{m.group(2).lstrip("/")})',
+        content
+    )
+    
+    # Rewrite HTML img tags: <img src="relative/path.jpg">
+    content = re.sub(
+        r'<img([^>]*?)src=["\'](?!http)([^"\']+)["\']',
+        lambda m: f'<img{m.group(1)}src="{base_url}/{m.group(2).lstrip("/")}\"',
+        content
+    )
+    
+    return content
 
 for repo in intern_repos:
     r = requests.get(
@@ -21,11 +39,10 @@ for repo in intern_repos:
     )
     if r.status_code == 200:
         content = base64.b64decode(r.json()["content"]).decode()
+        content = rewrite_image_urls(content, org, repo["name"])
         
-        # Save as intern-john.md inside dist/interns/
-        filename = f"dist/interns/{repo['name']}.md"
-        with open(filename, "w") as f:
+        with open(f"interns/{repo['name']}.md", "w") as f:
             f.write(content)
-        print(f"Saved {filename}")
+        print(f"Saved {repo['name']}.md")
     else:
-        print(f"No profile.md found in {repo['name']}, skipping")
+        print(f"No profile.md in {repo['name']}, skipping")
