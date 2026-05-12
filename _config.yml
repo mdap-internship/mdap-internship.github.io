@@ -1,0 +1,12 @@
+# _config.yml
+collections:
+  interns:
+    output: true
+    permalink: /interns/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: interns
+    values:
+      layout: intern
