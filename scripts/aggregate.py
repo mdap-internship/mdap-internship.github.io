@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import json
 import shutil
@@ -6,7 +7,6 @@ import yaml
 from datetime import datetime
 from pathlib import Path
 import urllib.request
-import urllib.error
 
 ORG       = os.environ["ORG"]
 PAT       = os.environ["GH_TOKEN"]
@@ -50,8 +50,15 @@ while True:
     all_repos.extend(batch)
     page += 1
 
-intern_repos = [r for r in all_repos if r["name"].startswith(PREFIX)]
-print(f"Found {len(intern_repos)} intern repos")
+TEMPLATE_RE = re.compile(r"template", re.IGNORECASE)
+
+def is_template(repo: dict) -> bool:
+    if repo.get("is_template"):
+        return True
+    return bool(TEMPLATE_RE.search(repo["name"]))
+
+intern_repos = [r for r in all_repos if r["name"].startswith(PREFIX) and not is_template(r)]
+print(f"Found {len(intern_repos)} intern repos (templates excluded)")
 
 # ── Clear previous build content (but keep .gitkeep) ─────────────────────────
 

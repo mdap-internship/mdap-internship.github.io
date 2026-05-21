@@ -20,9 +20,12 @@ We convert it to an array first, then group by cohort.
   <h2>{{ cohort_group.name }}</h2>
   <ul class="intern-list">
     {% for intern in cohort_group.items %}
-    <li>
+    <li class="intern-card">
       <a href="{{ '/interns/' | append: intern.username | append: '/' | relative_url }}">
-        {{ intern.display_name }}
+        {% assign photo_path = '/interns/' | append: intern.username | append: '/assets/img/profile-photo.png' %}
+        <img class="intern-avatar" src="{{ photo_path | relative_url }}" alt="{{ intern.display_name }}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="intern-avatar intern-avatar--initials" style="display:none" aria-hidden="true">{{ intern.display_name | slice: 0 }}</span>
+        <span class="intern-name">{{ intern.display_name }}</span>
       </a>
     </li>
     {% endfor %}

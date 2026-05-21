@@ -10,3 +10,4 @@ vendor/
 interns/*
 !interns/.gitkeep
 _data/cohorts.yml
+.DS_Store
