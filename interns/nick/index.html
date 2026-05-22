@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicholas Cotugno Morrison</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header>
+        <a href="/">← All Interns</a>
+    </header>
+    <main>
+        <article class="intern-profile">
+    <h1 id="interns-report">Intern’s report</h1>
+<h1 id="my-time-at-mdap-simulating-human-vision">My Time at MDAP: Simulating Human Vision</h1>
+
+<p><strong>MDAP Internship Semester 1, 2026</strong><br />
+<strong>Nicholas Cotugno Morrison</strong><br />
+<strong>Supervised by Dr Damien Mannion</strong></p>
+
+<h2 id="introduction-and-aims">Introduction and Aims</h2>
+
+<p>Throughout my time at MDAP, I was given the incredible opportunity to work on a project at the intersection of data science and human perception. This project focused on microperimetry, which is a diagnostic test that maps out how sensitive the retina is to light across different parts of a person’s visual field.</p>
+
+<p>While doctors rely heavily on these tests to monitor retinal diseases, the current models they use often assume a patient’s response is based purely on the stimuli and their ability to see it. However, human behavior is far messier… people might lapse in concentration or press the button by mistake! Recognising this, our overarching goal was to expose the shortfalls of these standard assumptions which led to three main aims:</p>
+
+<ol>
+  <li>To build a more realistic observer model that accounts for these human factors</li>
+  <li>To create an accurate spatial model of the visual field</li>
+  <li>To quantify the difference the correct assumptions make on the resulting sensitivity measurements</li>
+</ol>
+
+<h2 id="my-role-and-contributions">My Role and Contributions</h2>
+
+<p>During the internship, my main focus was on extending the simulation codebase. My key contributions to the project included:</p>
+<ul>
+  <li>Modelling the visual field as location dependent</li>
+  <li>Incorporating prior distributions for some of the models’ parameters</li>
+  <li>Running large-scale simulations in parallel on the University’s high-performance computing cluster, SPARTAN.</li>
+</ul>
+
+<h2 id="achievements-learnings-and-technical-challenges">Achievements, Learnings, and Technical Challenges</h2>
+
+<p><strong>What did I achieve?</strong>
+By the end of the project, I was able to quantify the difference between the correct assumptions and the current assumptions used in practice. This milestone was only possible by extending our codebase to incorporate both an accurate observer model and an accurate spatial model of the visual field, and by running an extensive set of simulations on SPARTAN.</p>
+
+<p><strong>What have I learnt?</strong>
+My undergraduate studies in Data Science gave me the foundations (in probability theory and Bayesian statistics), but applying those tools to model human vision and decision-making was a steep and rewarding learning curve. The project deepened my understanding of the complexities of human vision and introduced me to Signal Detection Theory as a framework for modelling perceptual decisions all from a Bayesian perspective.</p>
+
+<p><strong>How did I overcome technical issues?</strong>
+Whenever I hit a roadblock, technical issues were overcome by consulting with my fantastic supervisor, who is truly an expert in the field of human perception. I also spent time reviewing literature, although this was a challenge in of itself because a lot of the time the literature didn’t have the exact answers we were looking for.</p>
+
+<h2 id="research-outcomes">Research Outcomes</h2>
+
+<p>Here is a look at one of the resulting simulated microperimetry sessions which utilise the improved observer and spatial models.</p>
+
+<p><img src="assets/img/sens_map.png" alt="Final NA-up grid example sim" width="400" /></p>
+
+<p>Running a single simulation is fine, but to quantify the difference between the assumptions, we need to run the simulations on a much larger scale. This is where SPARTAN comes in. It allowed me to run simulations in parallel, drastically increasing the scope of our analysis.</p>
+
+<p><img src="assets/img/SPARTAN.png" alt="SPARTAN example sim" width="400" /></p>
+
+<p>While the research is still ongoing, the simulations have already helped quantify the difference between the simplified assumptions currently used in practice and more realistic models of human perception and decision-making. These findings would not have been possible without incorporating accurate observer and spatial models of the visual field, and I am glad to have been able to contribute to work that may one day improve how visual function is measured and support better outcomes for patients.</p>
+
+<h2 id="about-me">About Me</h2>
+
+<p>My name is Nicholas, and I have just begun my Masters in Data Science at the University of Melbourne. I love all things motorsport and have been long fascinated with the wonders of the universe. If I’m not watching races or reading up on space news, you can likely find me working on software for The University of Melbourne’s rocketry team (<a href="https://aresrocketry.com">ARES</a>).</p>
+
+<p>I found myself applying to MDAP at the start of my Masters because I wanted to get a taste of what working in research is like, and I thought that MDAP would be the perfect environment to apply what I had learnt in my undergraduate studies. I would highly recommend an internship at MDAP! You not only get to work on projects that are both interesting and challenging, but you also get to collaborate with some incredibly brilliant and supportive people in the research field.</p>
+
+<p><img src="assets/img/profile-photo.png" alt="MDAP-intern identicon profile photo :)" width="300" /></p>
+
+</article>
+    </main>
+</body>
+
+</html>

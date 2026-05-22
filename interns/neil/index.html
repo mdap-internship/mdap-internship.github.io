@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neil Shekhar</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header>
+        <a href="/">← All Interns</a>
+    </header>
+    <main>
+        <article class="intern-profile">
+    <h1 id="my-internship-journey">My Internship Journey</h1>
+
+<h2 id="personal-side">Personal Side</h2>
+
+<p><img src="/interns/neil/assets/img/personal-photo.jpg" alt="Neil" /></p>
+
+<p>Hi, I’m Neil. I’m a Master of Information Technology student at the University of Melbourne. Outside of work I’m usually playing/watching sport particularly Football and F1, watching a movie, or trying to explore new places. Big fan of spicy food, and always up for trying something new.</p>
+
+<h2 id="how-i-ended-up-at-mdap">How I ended up at MDAP</h2>
+
+<p>I saw the MDAP intern job ad on the uni careers website. What drew me to MDAP, compared to the other places I was looking at, was the chance to work with teams and stakeholders from completely different industries. That cross-collaboration was the most interesting part for me. Most of the work was also research-facing, which I had no real experience with, and I was curious to see what that side of things felt like from the inside.</p>
+
+<p>I started both excited and nervous. Excited because the projects sounded genuinely interesting, and nervous because I didn’t really know what kind of work I’d be asked to do or whether I’d be able to do it. Over time, that shifted. I stopped thinking of myself as an intern waiting to be told what to do, and started showing up the way a full-time employee would, owning tasks, pushing back when something didn’t feel right, and figuring out the parts I didn’t know as I went.</p>
+
+<h2 id="suburban-futures">Suburban Futures</h2>
+
+<p>Suburban Futures is a collaboration between MDAP and the Faculty of Architecture, Building and Planning. I worked with Amanda Belton and Emily Fitzgerald on the data and visualisation strand for Greater Melbourne’s suburbs, ahead of the symposium and exhibition later this year. My focus was on systems and infrastructure, essentially how public facilities relate to where people live and how that pattern has changed over time. The maps I built are part of a larger data navigator, and some of them can be viewed <a href="https://unimelbmdap.github.io/suburban_futures/">here</a>.</p>
+
+<p>Geospatial work was almost entirely new to me when I started. I had to learn how to join population and infrastructure data at suburb level, choose sensible rates and comparisons, and turn the analysis into interactive maps that people who weren’t analysts could actually use. The first map I built was a snapshot of infrastructure access across Melbourne, showing facilities per 1,000 residents with every public infrastructure point overlaid. The second was a timeline version, animating how new infrastructure tracked against population growth from 2010 to 2024. Both were the kind of thing where the technical work was only half the job. The other half was iterating on stakeholder feedback, changing labels, comparisons, and tooltips round after round until the maps were fit for the audience and not just technically correct.</p>
+
+<p>The third map is the one I’m most attached to, because of how its angle shifted as I worked on it. I had originally wanted to build something around home-based businesses, and was using self-employment data as a proxy for that. But once I started looking at the breakdown properly, the self-employment story turned out to be more interesting in its own right than the home-business one I had set out to tell. Different parts of Melbourne were specialising in completely different self-employed industries, and the geography of that was striking. Home-based businesses are part of the self-employment picture, but only one slice of it, and forcing the map to that slice would have hidden the better story. So I let the framing follow the data, and the map became about where Melbourne’s self-employed economy is growing, with industry filters that let viewers see the regional patterns for themselves.</p>
+
+<p><img src="/interns/neil/assets/img/map-1.png" alt="Current infrastructure access across Melbourne" />
+<em>Map 1: Current infrastructure access across Melbourne, SA2 level.</em></p>
+
+<p><img src="/interns/neil/assets/img/map-2.png" alt="Infrastructure timeline 2010 to 2024" />
+<em>Map 2: Infrastructure additions and population growth over time.</em></p>
+
+<p><img src="/interns/neil/assets/img/map-3.png" alt="Self-employed business density" /></p>
+
+<p><em>Map 3: Where Melbourne’s self-employed economy is growing.</em></p>
+
+<h2 id="emote">EMOTE</h2>
+
+<p>EMOTE is an open database of experience-sampling research data, hosted by the FEEL Lab in the Department of Psychology. The <a href="https://emotedatabase.com/">site</a> is used by researchers looking for variables and studies relevant to their work. I worked with Daniel and the lab on semantic search, the idea being that a researcher should be able to describe a topic in plain language and get back the right variables, not only the ones that happen to share keywords with their query.</p>
+
+<p>This felt different to Suburban Futures from day one. Instead of starting from a blank notebook, I was contributing to a live codebase that real researchers used. There was already a chatbot in place that used an embedding model, but the metadata it was working with wasn’t rich enough to give consistently useful results. A lot of my work was about that, taking study and variable information and shaping it into something high-dimensional enough that an embedding model could actually do something interesting with it.</p>
+
+<p>Vector embeddings were the part I most wanted to learn, and getting to do it in practice was honestly one of the best parts of the internship. There’s something genuinely satisfying about preparing data so that a query nobody has seen before still returns the right results, just because the meaning is close enough in vector space. Later on I got to compare local embedding models against OpenAI’s, to see how the trade-off between cost, privacy, and quality played out on this specific kind of data. That was less about getting a definitive answer and more about understanding what each option was actually good for.</p>
+
+<p>The work is not in production yet, so I haven’t included screenshots. What I have left behind is documentation and notes on embedding options so whoever picks it up next can keep going.</p>
+
+<h2 id="looking-back">Looking back</h2>
+
+<p>The hardest part wasn’t any single technical thing. It was learning to hold two projects in my head at the same time, each with its own team, tools, and rhythm. Early on I’d find myself half-thinking about EMOTE during a Suburban Futures meeting, or the other way around. Over time I got better at planning ahead, working out which tasks needed to be tackled first, and being honest with both teams about what I could realistically deliver in a given week. My supervisors helped a lot. They understood I had uni commitments alongside the internship, and gave me space to manage my own time rather than micromanaging the work.</p>
+
+<p>The bigger thing I’m taking away is how much of the work is ideation. In a regular company you usually walk in knowing what needs to be built, but here the question itself is part of the job. Research work is about digging deeper to figure out what’s even worth working on, and the answer often shifts as you go. The Map 3 story is a small version of that, and the EMOTE work is the same idea on a longer timeline. I came in expecting to be handed problems and ended up spending a lot of time helping shape what the problem actually was. That’s a different muscle to the one I’d built at uni, and it’s the part I’ll carry into whatever comes next.</p>
+
+</article>
+    </main>
+</body>
+
+</html>

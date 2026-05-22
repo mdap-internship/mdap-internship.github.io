@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anqi Liao</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header>
+        <a href="/">← All Interns</a>
+    </header>
+    <main>
+        <article class="intern-profile">
+    <h1 id="about-myself">About myself</h1>
+<p><img src="assets/img/profile-photo.jpg" alt="Anqi with her cat Ben" width="240" /></p>
+
+<p>I am currently a Master of Data Science student in the University of Melbourne, completing my final semester in June 2026. Before this, I have completed a Master of Philosophy, also known as Master by Research, in Photovoltaics and Solar Energy at UNSW, where I earned my Bachelor of Engineering in the same major.</p>
+
+<p>This photo shows me with my cat, Ben.</p>
+
+<h2 id="why-did-i-come-to-mdap">Why did I come to MDAP?</h2>
+<p>As this is my final semester, I chose to take the internship subject so that I could gain practical experience while receiving credit toward my degree.</p>
+
+<p>Two of my friends had previously completed internships with the Melbourne Data Analytics Platform (MDAP), and both spoke very positively about their experiences. Their feedback encouraged me to apply for an internship opportunity with MDAP, and I was very glad to be accepted.</p>
+
+<h2 id="about-the-project">About the project</h2>
+<p>The project I am currently working on explores how the Model Context Protocol (MCP) can be used together with large language models (LLMs) to support music score analysis. The project has an existing GitHub repository: <a href="https://github.com/unimelbmdap/encoding-music-mcp">encoding-music-mcp</a>.</p>
+
+<p>Many musicians and music researchers may not be familiar with programming or data visualisation tools, even though they often work with complex musical structures and analytical questions. This project aims to make music score analysis more accessible by allowing users to interact with music analysis tools through natural language.</p>
+
+<p>By setting up an MCP server, either locally or remotely, and connecting it to a compatible MCP client such as Claude Desktop, users can ask questions about musical scores in plain language. The LLM can then call tools from the MCP server, retrieve analysis results, and help interpret them in a more user-friendly way.</p>
+
+<p>My role in this project was to extend the existing MCP-based workflow by developing and testing tools that make Music Encoding Initiative (MEI) score analysis easier to generate, visualise, and interpret through natural language. I worked on Python-based MCP tools for musical analysis and visualisation, including weighted note distribution plots, melodic n-gram heatmaps, sonority n-gram progress visualisations, voice range summaries, notation rendering, notation highlighting, and audio playback of score excerpts. I also contributed to the workflow for registering MEI files that are supplied by users, so that users are not limited to the built-in score collections.</p>
+
+<p>A key part of my work was connecting computational music analysis outputs to more accessible user-facing formats. Rather than returning only raw tables or code-oriented data, the tools produce structured results, visual payloads, rendered notation, and playback resources that can be displayed inside MCP-compatible clients. I also tested these tools with Claude Desktop to explore how a user could request an analysis in plain language and receive both the result and an explanation without needing to run Python code directly.</p>
+
+<p>This demo illustrates how users can request music analysis results through natural language in Claude Desktop. Here, the user asks for a weighted note distribution plot for two Bach inventions, and the MCP server calls the relevant tool to generate a visualisation and interpretation. This shows how MCP can make computational music analysis more accessible to musicians and researchers without requiring them to use programming or data visualisation software directly.</p>
+
+<p><img src="/interns/anqi/assets/img/weighted_note_dist.gif" alt="demo animation" /></p>
+
+<h2 id="about-my-supervisor">About my supervisor</h2>
+<p><img src="assets/img/daniel_photo.jpg" width="240" /></p>
+
+<p>My internship supervisor is 
+<a href="https://findanexpert.unimelb.edu.au/profile/551741-daniel-russo-batterham">Dr Daniel Russo-Batterham</a>, 
+a Senior Research Data Specialist at MDAP. Daniel has a background in digital humanities and computational music research, including a PhD project that used computational methods to study seventeenth-century lute songs and text-music relationships. His experience made him a great supervisor for this project, as the internship combines music analysis, data visualisation, and the use of LLMs through MCP. His guidance helped me better understand how technical tools can be designed to support researchers from non-programming backgrounds.</p>
+
+<h2 id="about-my-experience">About my experience</h2>
+<p>During the internship, I mainly worked with Python to implement data visualisation tools and audio playback tools for music score analysis. This gave me the opportunity to apply my data science skills in a domain that was new to me and to think carefully about how technical outputs can be made useful for non-technical users.</p>
+
+<p>Through this project, I learned more about MCP and how it can connect LLMs with external tools. I also gained experience working with music encoding formats, building analysis workflows, and designing visualisations that communicate musical information clearly.</p>
+
+<p>One important thing I learned is that a useful tool is not only about producing correct results. It also needs to present those results in a way that users can understand and explore. Working on this project helped me better understand the importance of accessibility, user experience, and communication in data science projects.</p>
+
+</article>
+    </main>
+</body>
+
+</html>
