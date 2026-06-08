@@ -14,41 +14,81 @@
     </header>
     <main>
         <article class="intern-profile">
-    <h1 id="about-me">About me</h1>
-<p>An information systems student with a background in biomedical science. I have a keen interest in data analytics, process improvement and digital transformation. In my free time, my hobbies include photography, self improvement and dabbling in swing and position trading.</p>
+    <h1 id="about-me">About Me</h1>
+
+<p><img src="assets/img/profile-photo.jpeg" align="left" width="200" alt="Alt text" /></p>
+
+<p>An information systems student with a background in biomedical science. I have a keen interest in data analytics, process improvement and digital transformation. In my free time, my hobbies include photography, self-improvement and dabbling in swing/position trading.</p>
+
+<p><br clear="left" /></p>
 
 <h2 id="what-drew-me-to-mdap">What drew me to MDAP</h2>
-<p>I was drawn to MDAP’s vast multidisciplinary colaborations, with each making significant impact in their own fields. This breadth of collaborations highlights the pivotal role data plays in shaping our world today and underpins the criticality of being data literate. Along with my interest in data analytics, I was keen to learn and contribute to MDAP’s work.</p>
+<p>I was drawn to MDAP’s vast multidisciplinary collaborations, with each making significant impact in their own fields. This breadth of collaborations highlights the pivotal role data plays in shaping our world today and underpins the criticality of being data literate. Along with my interest in data analytics, I was keen to contribute to MDAP’s work wherever I can and learn as much as I can from the experience.</p>
+
+<h2 id="internship-experience">Internship Experience</h2>
+<p>The quote that probably best captures my experience at MDAP is by Benjamin Franklin:</p>
+
+<blockquote>
+  <p>“Tell me and I forget, teach me and I may remember, involve me and I learn.”</p>
+</blockquote>
+
+<p>During this internship, I worked on two distinctly different projects, each varying in research focus, technical demands, and even team dynamics. This contrast challenged me to adapt quickly and engage with unfamiliar concepts effectively. At times, the experience felt overwhelming, like “drinking from a hose” when trying to absorb new information at a rapid pace while striving to simultaneously contribute meaningfully. There were moments where I felt underprepared and, in hindsight, there are certainly aspects I would approach differently.</p>
+
+<p>Despite these challenges, I felt that the experience was highly valuable. I developed practical skills such as using GitHub and Spartan, gained exposure to real-world applications of machine learning and data workflows, and learned how to navigate ambiguity in a professional setting. More importantly, the internship provided clarity about my interests and potential career directions after graduation. This internship experience reinforced the idea that one can only plan and theorise so much - sometimes you just got to try!</p>
 
 <h1 id="project-vicextinct">Project VicExtinct</h1>
+<ul>
+  <li>Supervised by Damien Mannon in collaboration with Lynette Loke</li>
+</ul>
 
 <h2 id="overview">Overview</h2>
 
-<h2 id="aims">Aims</h2>
+<h3 id="context">Context</h3>
+<p>Marine biodiversity is known to be changing rapidly, but there is no clear integrated baseline of which species occurs and their location along the coast. This lack of a baseline makes it hard to quantify change, anticipate future declines, and prioritise conservation efforts.</p>
+
+<h3 id="challenge">Challenge</h3>
+<p>Biodiversity records are scattered across many repositories with different formats and detail, making them technically difficult to extract and combine at scale. This fragmentation creates a critical bottleneck, preventing the creation of an accessible, standardised dataset needed for extinction modelling.</p>
+
+<h3 id="aim">Aim</h3>
+<p>The project aims to model marine species extinctions and declines along Victoria’s coasts, identifying what has been lost, which species are most at risk, and where to prioritise conservation efforts. MDAP’s role is to build a reproducible, automated workflow that consolidates all relevant records into the first unified dataset suitable for extinction modelling and mapping extinction risk.</p>
+
+<h3 id="solution">Solution</h3>
+<p>To build an automated and reproducible workflow leveraging the <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> workflow manager to extract, standardise, clean, and integrate occurrence records into analysis-ready dataset for extinction modelling.</p>
 
 <h2 id="my-scope">My Scope</h2>
+<p>My scope was to incorporate two repositories into the workflow. They are:</p>
+
+<h3 id="ocean-biodiversity-information-system-obis">Ocean Biodiversity Information System (<a href="https://obis.org/">OBIS</a>)</h3>
+<p>The Ocean Biodiversity Information System (OBIS) is a global data system that focuses specifically on marine and coastal biodiversity, providing open access to information on the distribution and diversity of ocean life. It aggregates marine species‑occurrence data (e.g. surveys, monitoring, historical records, and increasingly DNA‑derived records).</p>
+
+<h3 id="global-biodiversity-information-facility-gbif">Global Biodiversity Information Facility (<a href="https://www.gbif.org/">GBIF</a>)</h3>
+<p>The Global Biodiversity Information Facility (GBIF) is an international network and data infrastructure funded by governments to provide anyone, anywhere, open access to data about all types of life on Earth. GBIF’s data sources range from museum specimens and herbarium sheets to modern observations, DNA barcodes and citizen‑science records.</p>
 
 <h2 id="research-outcomes">Research Outcomes</h2>
+<p>Through this project, I got to experience the whole process cycle of building a workflow from the beginning of requirements collection to a first iterative workflow pipeline deliverable. I contributed by expanding the breadth of data sources the workflow draws data from to include OBIS and GBIF.</p>
 
 <h1 id="project-escape">Project ESCAPE</h1>
+<ul>
+  <li>Supervised by Kabir Manandhar Shrestha (and special mention Robert Turnbull) in collaboration with Sam Wilks</li>
+</ul>
 
 <h2 id="overview-1">Overview</h2>
+<h3 id="context-1">Context</h3>
+<p>Viruses like influenza are constantly evolving, accumulating many genetic changes that help them escape existing population immunity and reduce vaccine effectiveness. Global surveillance can only experimentally test a small fraction of circulating strains so computational models such as machine learning models are increasingly used to predict “immune escape” from genetic sequence data.</p>
 
-<h2 id="aims-1">Aims</h2>
+<h3 id="challenge-1">Challenge</h3>
+<p>Existing models developed by our external collaborators work well mainly by interpolating between mutations that have already been seen in the training data. However, they perform substantially worse in predicting a small critical set of new genetic changes that lead to immune escape which is exactly what matters most for early detection of variants of concern and for vaccine updates.</p>
+
+<h3 id="aims">Aims</h3>
+<p>The overall aim is to develop and implement models that reliably detect when genetic changes not seen in the training data are likely to cause immune escape, using historical and recent influenza surveillance data as primary test cases.</p>
+
+<p>A sub-aim that was worked on was to develop and validate modelling approaches that incorporate sequence-structure representations to improve detection of antigenic effects caused by genetic mutation.</p>
 
 <h2 id="my-scope-1">My Scope</h2>
+<p>My scope specifically focussed on visualising the differences in Evolutionary Scale Model (ESM)-based encodings of different labelled groups of viral protein sequences.</p>
 
 <h2 id="research-outcomes-1">Research Outcomes</h2>
-
-<h1 id="internship-learning">Internship Learning</h1>
-
-<p>Note:
-You can always add links like <a href="https://www.unimelb.edu.au/mdap">this</a></p>
-
-<p>Remember to change your profile-photo, make sure it’s got the same name <code class="language-plaintext highlighter-rouge">assets/img/profile-photo.png</code>
-<img src="/interns/haoyang/assets/img/profile-photo.png" alt="MDAP-intern identicon profile photo :)" /></p>
-
-<p>Remember to make at least 1 commit, otherwise the main website’s repository will not pick up your profile (this is to avoid showing empty profiles on the page)</p>
+<p>Through this project, I got to experience a real-life application of machine learning in the familiar field of infection and immunity. I contributed by elucidating the differences in ESM encodings of different groups of viral proteins using dimensionality reduction techniques such as PCA and UMAP. I also compared the dimensionality reduction outcomes between embeddings generated by different machine learning models in the ESM2 family.</p>
 
 </article>
     </main>
