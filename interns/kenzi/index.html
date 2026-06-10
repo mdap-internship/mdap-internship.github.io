@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenzi Lamberto</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header>
+        <a href="/">← All Interns</a>
+    </header>
+    <main>
+        <article class="intern-profile">
+    <p>This will be your very own page!</p>
+
+<h1 id="about-me">About me</h1>
+<p><img src="/interns/kenzi/assets/img/profile-photo.jpg" alt="MDAP-intern identicon profile photo :)" /></p>
+
+<p>A data science student, looking to make impact in life. Previously, I studied Actuarial Science in Bogor Agricultural University and worked for three years back home (Indonesia). This internship showed me that sometimes life is more than just a profit in the financial report :D</p>
+
+<p>More pics</p>
+
+<p><img src="assets/img/image-5.png" height="200" />
+<img src="assets/img/image-3.png" height="200" /></p>
+
+<h1 id="interns-report">Intern’s report</h1>
+<p>You can always add links like <a href="https://www.unimelb.edu.au/mdap">this</a></p>
+
+<p>Remember to change your profile-photo, make sure it’s got the same name <code class="language-plaintext highlighter-rouge">assets/img/profile-photo.png</code></p>
+
+<p>Remember to make at least 1 commit, otherwise the main website’s repository will not pick up your profile (this is to avoid showing empty profiles on the page)</p>
+
+<h1 id="mdap-internship-project">MDAP Internship Project</h1>
+<h3 id="spotify-wrapped-unpacked-music-data-and-student-behaviour">Spotify Wrapped Unpacked: Music Data and Student Behaviour</h3>
+
+<h2 id="my-wonderful-mentors">My Wonderful Mentors</h2>
+<h3 id="amanda-belton">Amanda Belton</h3>
+<p><img src="assets/img/image-1.png" width="200" /></p>
+
+<p>She is a data scientist working with researchers to visualise data. She works with playful approaches and empathetic design principles to communicate research data visually, into the digital realm. Her work uses animation and mixed reality in accessible information designs.</p>
+
+<h3 id="daniel-russo-batterham">Daniel Russo-Batterham</h3>
+<p><img src="assets/img/image-2.png" width="200" /></p>
+
+<p>He came from a humanities background and became increasingly interested in finding ways to analyse, visualise and understand large corpora of music and text, so he developed the skills to do this. Eventually he realised that the Data Science skills could be applied much more broadly into the field of music.</p>
+
+<h1 id="technical-side">Technical Side</h1>
+<h2 id="introduction">Introduction</h2>
+<p>MDAP collaboration with Faculty of Fine Arts and Music. The big idea of this project is explore whether it is feasible to understand why university students choose to listen to selected songs by examining a combination of Spotify listening history data and direct reflections provided through interviews.</p>
+
+<p>Specifically, we will examine how participants feel about accessing and sharing their extended listening history from Spotify; whether it is feasible to extract meaningful data about what, when and how often they choose songs as the basis for a further discussion; and, how participants describe why they have chosen those songs once provided with data about what, when and how often they selected those songs.</p>
+
+<h2 id="my-portion-of-the-project">My Portion of the Project</h2>
+<p>We are currently working in the first stage, data collection. My task is to deep-dive into the Spotify Data that was gracefully provided by some collaborators to use for our research, and make insights that will be useful. We can call this stage “prototyping”.</p>
+
+<p>Hopefully this will be useful for our collaborators and students who are going to participate in this research.</p>
+
+<ul>
+  <li><strong>Data Collection:</strong> Discovered that students might be only willing to share some parts of their Spotify data (listening history), but not the additional data (playlist, library, search queries, etc.). This is because that additional data are sent by spotify together with personal data (payment data and etc.), which could be a privacy concern for students.</li>
+</ul>
+
+<p><img src="/interns/kenzi/assets/img/image-4.png" alt="Streaming History Data" /></p>
+
+<p>I had to think about how to deal with this missing context and build pipelines to handle the (missing) data gracefully.</p>
+
+<ul>
+  <li><strong>Emotion Mapping:</strong> Integrated emotion datasets (Ekman (lyrics-based) and Thayer (audio-based) models) that connect to student listening history data and produce emotions based on the lyrics and/or audio metadata.</li>
+</ul>
+
+<p><img src="/interns/kenzi/assets/img/image.png" alt="Ekman and Thayer Emotion Models Explained" /></p>
+
+<p>In the future, it will be useful to combine the models with interview transcript to create a more comprehensive emotional understanding of the user. Using spotify API and model the emotion from based on students’ Spotify data (resulting in better emotional view of the data) can also be an approach in the next stages of this project.</p>
+
+<ul>
+  <li><strong>Temporal Dashboard:</strong> Developed an interactive Temporal Dashboard that visualises how a student’s emotions change over time, using the Ekman and Thayer models.</li>
+</ul>
+
+<p><img src="/interns/kenzi/assets/img/image-6.gif" alt="Temporal Dashboard" /></p>
+
+<ul>
+  <li><strong>Actuarial Insights:</strong> Built “wrapped style” cards based on students’ data, utilising actuarial credibility measures to ensure statistical significance.</li>
+</ul>
+
+<p><img src="/interns/kenzi/assets/img/image-7.gif" alt="Wrapped Cards" /></p>
+
+<ul>
+  <li><strong>LLM Prototyping:</strong> Explored and tried to build an LLM model to automatically provide interview prompts based on user data, but discontinued (might be revived in future, especially with the interview transcripts).</li>
+</ul>
+
+<p><strong>New Direction:</strong></p>
+
+<p>Collaborators said the ethics level required for dealing with emotion is too high, so we have a new direction. To focus more on the behavior profile based on skips, shuffles, and other available data from the dataset itself.</p>
+
+<ul>
+  <li>Made “behaviour profile” based on the new directions from collaborators and supervisors.</li>
+</ul>
+
+<p><img src="/interns/kenzi/assets/img/image-8.png" alt="Brainstorming for New Direction" />
+<img src="/interns/kenzi/assets/img/image-7.png" alt="Behaviour Profile" /></p>
+
+<h2 id="what-i-learned">What I learned</h2>
+
+<ul>
+  <li>
+    <p><strong>Visualizing Data Effectively:</strong></p>
+
+    <p>I learned the difference between simply plotting numbers and actually telling a story. For instance, transforming our emotional timelines from standard line charts into stacked area charts made it significantly easier to digest the total volume of emotions.</p>
+
+    <p>We also had to build a custom “Local Maxima” peak-detection algorithm to ensure we were highlighting true emotional signals on the dashboard rather than just arbitrary calendar dates.</p>
+  </li>
+  <li>
+    <p><strong>Bridging Backend and Frontend Architecture:</strong></p>
+
+    <p>I learned how to decouple configuration from the source code. By utilizing Pydantic models in Python to establish research thresholds (like skip rates or emotion shifts) and securely passing those to the Vue frontend via a <code class="language-plaintext highlighter-rouge">config.json</code> and <code class="language-plaintext highlighter-rouge">.env</code> file, we made the entire instrument dynamically adjustable for future researchers without them needing to alter the core codebase.</p>
+  </li>
+  <li>
+    <p><strong>Failure is Progress:</strong></p>
+
+    <p>Discarding prototypes (like the early LLM prompt generator) was initially frustrating, but failure means you have learned what doesn’t work and found a clearer path forward.</p>
+  </li>
+  <li>
+    <p><strong>Context is Everything:</strong></p>
+
+    <p>Working with the Spotify Extended Streaming History exports and understanding the human context behind the data is crucial. For example, realizing that preserving “empty” or missing listening data is sometimes just as important as the data itself to avoid artificially skewing a student’s timeline.</p>
+  </li>
+  <li>
+    <p><strong>Adaptability:</strong></p>
+
+    <p>A project can change directions rapidly (like our ethics pivot from pure emotion tracking to the Banded Behavioral Model based on skips and shuffles), so always be prepared to adapt and restructure the pipeline.</p>
+  </li>
+</ul>
+
+<h3 id="overcoming-technical-issues">Overcoming Technical Issues</h3>
+<p>A major technical hurdle was dealing with incomplete or sparse data. Students often listen to “niche” tracks that are not mapped to our emotion datasets (or the datasets might also be too small, better to model it ourselves in the future with Spotify API). Currently, I overcame this by implementing a <strong>Nearest-Neighbor Imputation algorithm</strong>, which carries forward previous emotional states to fill gaps and maintain a continuous, readable timeline.</p>
+
+<p>I also had to learn how to bridge Python backend data with the Vue frontend by implementing Pydantic models for seamless threshold configuration. After that, the configuration must be stored in a Pydantic way so that future users can modify it all in one place.</p>
+
+<h2 id="personal-side">Personal Side</h2>
+<h3 id="why-i-joined-mdap">Why I joined MDAP</h3>
+<p>I know from my friends that MDAP is an amazing place to learn how it feels to be in a world class research collaboration environment. It actually is!</p>
+
+<h3 id="my-journey-in-mdap">My Journey in MDAP</h3>
+
+<p>I was very overwhelmed and excited at the beginning. I remember my first week was a struggle as I was adjusting to a new environment, learning new tools &amp; spotify data, and getting to know my supervisors &amp; peers.</p>
+
+<p>MDAP was the first thing I focused in for this semester (outside of my studies). But then I suddenly had two tutoring classes (for the same subject) assigned to me, so I had to learn to juggle all of them. I ended up working a lot of hours (around 10 hours each for MDAP and tutoring) for the semester. It was quite a lot to handle, so I had to learn to manage my time and prioritize tasks.</p>
+
+<p>MDAP helped me a lot in time management and prioritisation. Since MDAP is more flexible in terms of working hours, I was able to adjust my schedule to fit my tutoring hours. At the same time, I also learned a lot from my supervisors (they are my mentors, and very kind!). Especially about how to approach research problems, think critically, as well as being okay with failure and changes. These made me feel more confident in my abilities.</p>
+
+<p>Furthermore, I made new friendship with the MDAP members and we even made a matcha tea time session together!</p>
+
+<p>I really enjoyed this semester in MDAP, and I would recommend it to any student who is interested in data analysis and research.</p>
+
+</article>
+    </main>
+</body>
+
+</html>
