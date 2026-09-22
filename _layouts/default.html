@@ -1,20 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('mdap-theme');
+                document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
 <body>
-    <header>
-        <a href="{{ '/' | relative_url }}">← All Interns</a>
-    </header>
-    <main>
-        {{ content }}
-    </main>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="site-masthead-title">
+                    <span>Melbourne</span> <span class="highlighted-text">Data Analytics</span><span>Platform</span>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark and light mode"
+                    aria-pressed="false">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+                        </path>
+                    </svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} active{% endif %}">Interns Showcase</a>
+                <a href="{{ '/cohorts/' | relative_url }}" class="nav-link{% if page.url == '/cohorts/' %} active{% endif %}">Cohorts</a>
+
+                {% assign cohort_entries = "" | split: "" %}
+                {% for entry in site.data.cohorts %}
+                    {% assign cohort_entries = cohort_entries | push: entry[1] %}
+                {% endfor %}
+                {% assign cohort_groups = cohort_entries | group_by: "cohort" | sort: "name" | reverse %}
+
+                {% if cohort_groups.size > 0 %}
+                <ul class="cohort-nav">
+                    {% for group in cohort_groups %}
+                    <li>
+                        <a href="{{ '/cohorts/' | append: group.name | downcase | append: '/' | relative_url }}" class="cohort-nav-link{% if page.cohort == group.name %} active{% endif %}">
+                            {{ group.name | replace: '-', ' ' }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </nav>
+        </aside>
+
+        <div class="content-column{% if page.layout == "intern" %} no-hero-bg{% endif %}">
+            <div class="content-bg"></div>
+            <div class="content-overlay"></div>
+            <main class="main-content">
+                {{ content }}
+            </main>
+        </div>
+    </div>
+    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 </body>
 
 </html>

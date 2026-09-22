@@ -1,0 +1,23 @@
+# Configuration for scripts/aggregate.py.
+# This is a plain data file read by the Python script — it has nothing to do
+# with Jekyll's own _config.yml at the repo root.
+
+# How a repo is identified as an intern repo:
+#   prefix    — repo name starts with "intern-" (case-insensitive). The
+#               current/default method — interns must name their repo
+#               accordingly for it to be picked up.
+#   template  — repo was generated from `template_repo` below (checked via
+#               GitHub's own "generated from template" relationship). Lets
+#               interns name their repo anything, but costs one extra API
+#               call per repo in the org during aggregation.
+repo_detection: prefix
+
+# Only used when repo_detection: template. Full "owner/name" of the template
+# repo interns clone from. Verify this matches your actual template repo
+# before switching repo_detection to "template".
+template_repo: mdap-internship/intern-template
+
+# GitHub usernames (repo owners) whose intern-* repos should never be
+# aggregated into the showcase — e.g. maintainers' own test/template repos.
+# Matching is case-insensitive.
+exclude_github_usernames: [asiebel, undergoer]

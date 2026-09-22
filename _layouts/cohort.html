@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{% assign cohort_entries = "" | split: "" %}
+{% for entry in site.data.cohorts %}
+    {% assign cohort_entries = cohort_entries | push: entry[1] %}
+{% endfor %}
+{% assign members = cohort_entries | where: "cohort", page.cohort | sort: "display_name" %}
+
+<div class="cohort-page">
+    <header class="cohort-header">
+        <p class="cohort-eyebrow">Cohort</p>
+        <h1>{{ page.year }} &mdash; Semester {{ page.semester | remove: "S" }}</h1>
+        <p class="cohort-count">{{ members.size }} intern{% if members.size != 1 %}s{% endif %}</p>
+    </header>
+    <ul class="intern-list">
+        {% for intern in members %}
+            {% include intern-card.html intern=intern %}
+        {% endfor %}
+    </ul>
+</div>

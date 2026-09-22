@@ -1,0 +1,32 @@
+{% assign intern_url = '/interns/' | append: include.intern.username | append: '/' %}
+{% assign intern_doc = site.pages | where: "url", intern_url | first %}
+
+{% assign photo_base = '/interns/' | append: include.intern.username | append: '/assets/img/profile-photo' %}
+{% assign photo_path = '' %}
+{% assign photo_extensions = "png,jpg,jpeg,PNG,JPG,JPEG" | split: "," %}
+{% for ext in photo_extensions %}
+    {% if photo_path == '' %}
+        {% assign candidate = photo_base | append: '.' | append: ext %}
+        {% assign matches = site.static_files | where: "path", candidate %}
+        {% if matches.size > 0 %}
+            {% assign photo_path = candidate %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<li class="intern-card">
+    <a href="{{ '/interns/' | append: include.intern.username | append: '/' | relative_url }}">
+        {% if photo_path != '' %}
+        <img class="intern-avatar" src="{{ photo_path | relative_url }}" alt="{{ include.intern.display_name }}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="intern-avatar intern-avatar--initials" style="display:none" aria-hidden="true">{{ include.intern.display_name | slice: 0 }}</span>
+        {% else %}
+        <span class="intern-avatar intern-avatar--initials" aria-hidden="true">{{ include.intern.display_name | slice: 0 }}</span>
+        {% endif %}
+        <span class="intern-card-text">
+            <span class="intern-name">{{ include.intern.display_name }}</span>
+            {% if intern_doc.degree %}
+            <span class="intern-card-degree">{{ intern_doc.degree | slice: 0, 1 | upcase }}{{ intern_doc.degree | slice: 1, 300 }}</span>
+            {% endif %}
+        </span>
+    </a>
+</li>

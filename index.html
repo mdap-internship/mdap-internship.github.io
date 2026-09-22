@@ -1,34 +1,45 @@
 ---
 layout: default
 title: Intern Showcase
+permalink: /
 ---
 
-{% comment %}
-cohorts.yml is a hash keyed by username.
-We convert it to an array first, then group by cohort.
-{% endcomment %}
+<div class="home-hero">
+    <p class="eyebrow">MDAP Internship Program</p>
+    <h1>Intern Showcase</h1>
+    <p class="hero-lede">Explore projects from Melbourne Data Analytics Platform interns, cohort by cohort.</p>
+</div>
 
 {% assign interns = "" | split: "" %}
 {% for entry in site.data.cohorts %}
-{% assign interns = interns | push: entry[1] %}
+    {% assign interns = interns | push: entry[1] %}
 {% endfor %}
+{% assign years = interns | map: "year" | uniq | sort | reverse %}
 
-{% assign grouped = interns | group_by: "cohort" | sort: "name" | reverse %}
-
-{% for cohort_group in grouped %}
-<section class="cohort">
-  <h2>{{ cohort_group.name }}</h2>
-  <ul class="intern-list">
-    {% for intern in cohort_group.items %}
-    <li class="intern-card">
-      <a href="{{ '/interns/' | append: intern.username | append: '/' | relative_url }}">
-        {% assign photo_path = '/interns/' | append: intern.username | append: '/assets/img/profile-photo.png' %}
-        <img class="intern-avatar" src="{{ photo_path | relative_url }}" alt="{{ intern.display_name }}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="intern-avatar intern-avatar--initials" style="display:none" aria-hidden="true">{{ intern.display_name | slice: 0 }}</span>
-        <span class="intern-name">{{ intern.display_name }}</span>
-      </a>
-    </li>
+{% if years.size > 0 %}
+{% for yr in years %}
+{% assign year_items = interns | where: "year", yr %}
+{% assign semesters = year_items | map: "semester" | uniq | sort | reverse %}
+<section class="cohort-year">
+    <h2 class="cohort-year-title">{{ yr }}</h2>
+    {% for sem in semesters %}
+    {% assign sem_items = year_items | where: "semester", sem %}
+    <div class="cohort-semester">
+        <h3 class="cohort-semester-title">
+            <a href="{{ '/cohorts/' | append: yr | append: '-' | append: sem | downcase | append: '/' | relative_url }}">
+                Semester {{ sem | remove: 'S' }}
+            </a>
+        </h3>
+        <ul class="intern-list">
+            {% assign sorted_items = sem_items | sort: "display_name" %}
+            {% for intern in sorted_items %}
+                {% include intern-card.html intern=intern %}
+            {% endfor %}
+        </ul>
+    </div>
     {% endfor %}
-  </ul>
 </section>
 {% endfor %}
+{% else %}
+<p class="empty-state">No cohorts published yet &mdash; check back soon.</p>
+{% endif %}

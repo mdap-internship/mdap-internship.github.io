@@ -1,14 +1,15 @@
 # _config.yml
-collections:
-  interns:
-    output: true
-    permalink: /interns/:name/
+title: MDAP Internship Showcase
 
 defaults:
   - scope:
       path: "interns"
     values:
       layout: intern
+  - scope:
+      path: "cohorts"
+    values:
+      layout: cohort
 
 exclude:
   - scripts/

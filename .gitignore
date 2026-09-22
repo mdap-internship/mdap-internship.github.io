@@ -9,5 +9,9 @@ vendor/
 # CI-generated files — not committed
 interns/*
 !interns/.gitkeep
+cohorts/*
+!cohorts/.gitkeep
 _data/cohorts.yml
 .DS_Store
+# Local secrets — never commit
+.env
