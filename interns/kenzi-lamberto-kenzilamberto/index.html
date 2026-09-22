@@ -1,21 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kenzi Lamberto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('mdap-theme');
+                document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
 <body>
-    <header>
-        <a href="/">← All Interns</a>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="site-masthead-title">
+                    <span>Melbourne</span> <span class="highlighted-text">Data Analytics</span><span>Platform</span>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark and light mode"
+                    aria-pressed="false">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+                        </path>
+                    </svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/" class="nav-link">Interns Showcase</a>
+                <a href="/cohorts/" class="nav-link">Cohorts</a>
+
+                
+                
+                
+
+                
+                <ul class="cohort-nav">
+                    
+                    <li>
+                        <a href="/cohorts/2026-s2/" class="cohort-nav-link">
+                            2026 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2026-s1/" class="cohort-nav-link">
+                            2026 S1
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </nav>
+        </aside>
+
+        <div class="content-column no-hero-bg">
+            <div class="content-bg"></div>
+            <div class="content-overlay"></div>
+            <main class="main-content">
+                
+
+
+
+<article class="intern-profile">
+    <header class="intern-header">
+        <h1>
+            Kenzi Lamberto
+            
+            <a class="github-link" href="https://github.com/kenzilamberto" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+                </svg>
+                <span>kenzilamberto</span>
+            </a>
+            
+        </h1>
+        <p class="intern-role">MDAP Intern</p>
+        <p class="intern-meta">2026 S1 cohort</p>
+        
+        <p class="intern-degree">
+            Master of Data Science
+            <span class="intern-faculty">(Science)</span>
+        </p>
+        
+        
+        <ul class="intern-projects">
+            
+            
+            <li class="intern-project">
+                <span class="intern-project-title">Spotify Wrapped Unpacked</span>
+                
+                
+                
+                <span class="intern-project-supervisors">
+                    <span class="intern-project-supervisors-label">Supervised by</span>
+                    <span class="intern-project-supervisors-names">Amanda Belton, Dr. Daniel Russo-Batterham</span>
+                </span>
+                
+            </li>
+            
+            
+        </ul>
+        
     </header>
-    <main>
-        <article class="intern-profile">
-    <h1 id="about-me">About me</h1>
-<p><img src="/interns/kenzi/assets/img/profile-photo.jpg" alt="MDAP-intern identicon profile photo :)" /></p>
+    <div class="markdown-body">
+        <h1 id="about-me">About me</h1>
+<p><img src="/interns/kenzi-lamberto-kenzilamberto/assets/img/profile-photo.jpg" alt="MDAP-intern identicon profile photo :)" /></p>
 
 <p>A data science student, looking to make impact in life. Previously, I studied Actuarial Science in Bogor Agricultural University and worked for three years back home (Indonesia). This internship showed me that sometimes life is more than just a profit in the financial report :D</p>
 
@@ -55,7 +160,7 @@
   <li><strong>Data Collection:</strong> Discovered that students might be only willing to share some parts of their Spotify data (listening history), but not the additional data (playlist, library, search queries, etc.). This is because that additional data are sent by spotify together with personal data (payment data and etc.), which could be a privacy concern for students.</li>
 </ul>
 
-<!--[![Streaming History Data](/interns/kenzi/assets/img/image-4.png)]-->
+<!--[![Streaming History Data](/interns/kenzi-lamberto-kenzilamberto/assets/img/image-4.png)]-->
 <p><img src="assets/img/image-4.png" width="500" /></p>
 
 <p>I had to think about how to deal with this missing context and build pipelines to handle the (missing) data gracefully.</p>
@@ -64,7 +169,7 @@
   <li><strong>Emotion Mapping:</strong> Integrated emotion datasets (Ekman (lyrics-based) and Thayer (audio-based) models) that connect to student listening history data and produce emotions based on the lyrics and/or audio metadata.</li>
 </ul>
 
-<!--[![Ekman and Thayer Emotion Models Explained](/interns/kenzi/assets/img/image.png)]-->
+<!--[![Ekman and Thayer Emotion Models Explained](/interns/kenzi-lamberto-kenzilamberto/assets/img/image.png)]-->
 <p><img src="assets/img/image.png" width="800" /></p>
 
 <p>In the future, it will be useful to combine the models with interview transcript to create a more comprehensive emotional understanding of the user. Using spotify API and model the emotion from based on students’ Spotify data (resulting in better emotional view of the data) can also be an approach in the next stages of this project.</p>
@@ -73,14 +178,14 @@
   <li><strong>Temporal Dashboard:</strong> Developed an interactive Temporal Dashboard that visualises how a student’s emotions change over time, using the Ekman and Thayer models.</li>
 </ul>
 
-<!--[![Temporal Dashboard](/interns/kenzi/assets/img/image-6.gif)]-->
+<!--[![Temporal Dashboard](/interns/kenzi-lamberto-kenzilamberto/assets/img/image-6.gif)]-->
 <p><img src="assets/img/image-6.gif" width="800" /></p>
 
 <ul>
   <li><strong>Actuarial Insights:</strong> Built “wrapped style” cards based on students’ data, utilising actuarial credibility measures to ensure statistical significance.</li>
 </ul>
 
-<!--[![Wrapped Cards](/interns/kenzi/assets/img/image-7.gif)]]-->
+<!--[![Wrapped Cards](/interns/kenzi-lamberto-kenzilamberto/assets/img/image-7.gif)]]-->
 <p><img src="assets/img/image-7.gif" width="800" /></p>
 
 <ul>
@@ -95,8 +200,8 @@
   <li>Made “behaviour profile” based on the new directions from collaborators and supervisors.</li>
 </ul>
 
-<!--[![Brainstorming for New Direction](/interns/kenzi/assets/img/image-8.png)]-->
-<!--[![Behaviour Profile](/interns/kenzi/assets/img/image-7.png)]-->
+<!--[![Brainstorming for New Direction](/interns/kenzi-lamberto-kenzilamberto/assets/img/image-8.png)]-->
+<!--[![Behaviour Profile](/interns/kenzi-lamberto-kenzilamberto/assets/img/image-7.png)]-->
 
 <p><img src="assets/img/image-8.png" width="700" />
 <img src="assets/img/image-7.png" width="700" /></p>
@@ -154,8 +259,18 @@
 
 <p>I really enjoyed this semester in MDAP, and I would recommend it to any student who is interested in data analysis and research.</p>
 
+    </div>
 </article>
-    </main>
+
+
+
+
+
+
+            </main>
+        </div>
+    </div>
+    <script src="/assets/js/theme.js"></script>
 </body>
 
 </html>

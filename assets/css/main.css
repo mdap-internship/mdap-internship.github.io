@@ -1,67 +1,535 @@
+/* ── Theme tokens ─────────────────────────────────────────────────────── */
+
+:root {
+    --bg: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #eef1f4;--border: #d0d7de;
+    --border-faded: #d0d7de58;
+    --text: #1f2328;
+    --highlighted-text: #558d9e;
+    --text-secondary: #59636e;
+    --accent: #0969da;
+    --accent-hover: #0757ba;
+    --shadow: 0 1px 4px rgba(31, 35, 40, 0.08);
+    --shadow-hover: 0 8px 20px rgba(31, 35, 40, 0.12);
+    --radius: 10px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root[data-theme="dark"] {
+    --bg: #0b0f19;
+    --bg-secondary: #111827;
+    --bg-tertiary: #161d2e;
+    --border: #232b3d;
+    --border-faded: #232b3d58;
+    --text: #e6edf3;
+    --highlighted-text: #a3e4f7;
+    --text-secondary: #8b95a5;
+    --accent: #58a6ff;
+    --accent-hover: #79b8ff;
+    --shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 26px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
 * {
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 2rem;
-    background: #f9f9f9;
+html, body {
+    height: 100%;
 }
 
-/* ── Cohort sections ─────────────────────────────────────────────────────── */
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+a {
+    color: var(--accent);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* ── Site masthead ────────────────────────────────────────────────────── */
+
+.site-masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 2rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.site-masthead-title {
+    display: grid;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-transform: uppercase;
+}
+
+.site-masthead-title .highlighted-text {
+    color: var(--highlighted-text);
+}
+
+.sidebar .site-masthead-title {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.site-masthead-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 48px;
+    flex-shrink: 0;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ── Shell layout ─────────────────────────────────────────────────────── */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+}
+
+.brand {
+    display: block;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--text);
+    text-decoration: none;
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.01em;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.92rem;
+}
+
+.nav-link:hover {
+    background: var(--bg-tertiary);
+    color: var(--text);
+}
+
+.nav-link.active {
+    background: var(--bg-tertiary);
+    color: var(--text);
+}
+
+.cohort-nav {
+    list-style: none;
+    margin: 0.15rem 0 1rem;
+    padding: 0 0 0 0.75rem;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.cohort-nav-link {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.cohort-nav-link:hover {
+    background: var(--bg-tertiary);
+    color: var(--text);
+}
+
+.cohort-nav-link.active {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-column {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Background layer — sits behind the gradient overlay so either one can be
+   independently transformed (e.g. blurred) without affecting the other. */
+.content-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    background-image: url('/assets/img/mdap-hero-banner.jpg');
+}
+
+/* Semi-transparent gradient overlay — sits on top of .content-bg. */
+.content-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100% 100%;
+    background-image: linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        var(--bg) 15%,
+        color-mix(in srgb, var(--bg) 95%, transparent) 45%,
+        color-mix(in srgb, var(--bg) 75%, transparent) 75%,
+        color-mix(in srgb, var(--bg) 55%, transparent) 100%
+    );
+}
+
+.content-column.no-hero-bg .content-bg {
+    background-image: none;
+}
+
+.content-column.no-hero-bg .content-overlay {
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100% 100%;
+    background-image: linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 94%, black 6%) 100%
+    );
+}
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem 2rem 0;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--text-secondary);
+}
+
+.theme-toggle .icon {
+    width: 18px;
+    height: 18px;
+}
+
+.theme-toggle .icon-moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: block;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1.5rem 2rem 4rem;
+    max-width: 980px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 780px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .main-content {
+        padding: 1.25rem 1.25rem 3rem;
+    }
+
+    .topbar {
+        padding: 1rem 1.25rem 0;
+    }
+
+    .site-masthead {
+        padding: 1rem 1.25rem;
+    }
+
+    .site-masthead-title {
+        font-size: 1.1rem;
+    }
+
+    .site-masthead-logo {
+        width: 64px;
+        height: 36px;
+    }
+}
+
+/* ── Hero / page headers ──────────────────────────────────────────────── */
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+}
+
+.home-hero {
+    padding: 2.5rem 0 1.5rem;
+}
+
+.home-hero h1 {
+    font-size: 2.25rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-lede {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin: 0 0 1.5rem;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.button:hover {
+    background: var(--accent-hover);
+    color: #fff;
+}
+
+.page-header {
+    padding: 2rem 0 1.5rem;
+}
+
+.page-header h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.9rem;
+    letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.empty-state {
+    color: var(--text-secondary);
+}
+
+/* ── Cohort sections ──────────────────────────────────────────────────── */
 
 .cohort {
     margin-bottom: 2.5rem;
 }
 
-.cohort h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #888;
-    margin: 0 0 1rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid #e5e5e5;
+.cohort-year {
+    margin-bottom: 3.5rem;
 }
 
-/* ── Intern list ─────────────────────────────────────────────────────────── */
+.cohort-year-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.cohort-semester {
+    margin-bottom: 2.5rem;
+}
+
+.cohort-semester:last-child {
+    margin-bottom: 0;
+}
+
+.cohort-semester-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.5rem;
+    /* border-bottom: 1px solid var(--border-faded); */
+}
+
+.cohort-semester-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cohort-semester-title a:hover {
+    color: var(--accent);
+}
+
+.cohort h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.cohort h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cohort h2 a:hover {
+    color: var(--accent);
+}
+
+.cohort-header {
+    padding: 2rem 0 1.75rem;
+}
+
+.cohort-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 0.4rem;
+}
+
+.cohort-header h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.9rem;
+    letter-spacing: -0.02em;
+}
+
+.cohort-count {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ── Intern list ──────────────────────────────────────────────────────── */
 
 .intern-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
 }
 
 .intern-card a {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.65rem 0.9rem;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    gap: 0.85rem;
+    padding: 0.9rem 1.1rem;
+    min-height: 76px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     text-decoration: none;
-    color: #1a1a1a;
+    color: var(--text);
     font-weight: 500;
     font-size: 0.95rem;
-    transition: box-shadow 0.18s, transform 0.18s;
+    transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
 }
 
 .intern-card a:hover {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
+    border-color: var(--accent);
 }
 
-/* ── Avatar ──────────────────────────────────────────────────────────────── */
+/* ── Avatar ───────────────────────────────────────────────────────────── */
 
 .intern-avatar {
-    width: 38px;
-    height: 38px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -71,21 +539,276 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #dde9ff;
-    color: #3366cc;
+    background: var(--bg-tertiary);
+    color: var(--accent);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     user-select: none;
 }
 
-.intern-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.intern-card-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 0.15rem;
 }
 
-/* ── Legacy card grid (kept for backwards compat) ────────────────────────── */
+.intern-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+}
+
+.intern-card-degree {
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Intern profile page ──────────────────────────────────────────────── */
+
+.intern-header {
+    padding: 1.5rem 0 1.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.intern-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.3rem;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.intern-role {
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+}
+
+.intern-meta {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.intern-degree {
+    color: var(--text-secondary);
+    margin: 0.3rem 0 0;
+    font-size: 0.9rem;
+}
+
+.intern-faculty {
+    margin-left: 0.3em;
+}
+
+.intern-projects {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.intern-project {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.intern-project-title {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.intern-project-title::before {
+    content: "\2022";
+    margin-right: 0.4rem;
+    color: var(--text-secondary);
+}
+
+.intern-project-supervisors-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.intern-project-supervisors-names {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.github-link:hover {
+    color: var(--text);
+    border-color: var(--text-secondary);
+}
+
+.github-link .icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* ── Readme-style content typography ─────────────────────────────────── */
+
+.markdown-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    padding-bottom: 3rem;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 2rem 0 1rem;
+}
+
+.markdown-body h1 {
+    font-size: 1.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.markdown-body h2 {
+    font-size: 1.4rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.markdown-body h3 {
+    font-size: 1.2rem;
+}
+
+.markdown-body h1:first-child,
+.markdown-body h2:first-child,
+.markdown-body h3:first-child {
+    margin-top: 0;
+}
+
+.markdown-body p {
+    margin: 0 0 1rem;
+}
+
+.markdown-body a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.markdown-body a:hover {
+    border-bottom-color: currentColor;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.markdown-body li {
+    margin: 0.25rem 0;
+}
+
+.markdown-body blockquote {
+    margin: 0 0 1rem;
+    padding: 0.1rem 1rem;
+    border-left: 3px solid var(--border);
+    color: var(--text-secondary);
+}
+
+.markdown-body code {
+    font-family: var(--font-mono);
+    background: var(--bg-tertiary);
+    padding: 0.15em 0.4em;
+    border-radius: 5px;
+    font-size: 0.88em;
+}
+
+.markdown-body pre {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0 0 1rem;
+}
+
+.markdown-body pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    display: block;
+    overflow-x: auto;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.markdown-body th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+.markdown-body tr:nth-child(even) td {
+    background: var(--bg-secondary);
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* ── Legacy card grid (kept for backwards compat) ─────────────────────── */
 
 .intern-grid {
     display: grid;
@@ -95,10 +818,11 @@ body {
 }
 
 .card {
-    background: white;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow);
     transition: transform 0.2s;
 }
 
