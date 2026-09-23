@@ -1,6 +1,13 @@
 # _config.yml
 title: MDAP Internship Showcase
 
+# Hero background rendered behind page content (see _layouts/default.html):
+#   "datawave" — animated WebGL point-cloud (assets/js/datawave.js)
+#   "image"    — static banner photo (assets/img/mdap-hero-banner.jpg)
+# Flip this back to "image" if the WebGL visual ever causes rendering or
+# performance issues — no code changes needed.
+hero_background: datawave
+
 defaults:
   - scope:
       path: "interns"

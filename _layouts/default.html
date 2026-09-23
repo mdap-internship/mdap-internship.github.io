@@ -65,8 +65,16 @@
             </nav>
         </aside>
 
+        {% assign show_live_hero = false %}
+        {% if site.hero_background == "datawave" and page.layout != "intern" %}
+            {% assign show_live_hero = true %}
+        {% endif %}
         <div class="content-column{% if page.layout == "intern" %} no-hero-bg{% endif %}">
-            <div class="content-bg"></div>
+            <div class="content-bg{% if show_live_hero %} content-bg--live{% endif %}">
+                {% if show_live_hero %}
+                    {% include datawave.html %}
+                {% endif %}
+            </div>
             <div class="content-overlay"></div>
             <main class="main-content">
                 {{ content }}

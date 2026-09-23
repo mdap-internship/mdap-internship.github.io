@@ -237,6 +237,17 @@ a:hover {
     );
 }
 
+/* Live WebGL hero (assets/js/datawave.js, toggled via _config.yml's
+   hero_background) replaces the static photo instead of layering under it. */
+.content-bg--live {
+    background-image: none;
+}
+
+.datawave-canvas {
+    position: absolute;
+    inset: 0;
+}
+
 .content-column.no-hero-bg .content-bg {
     background-image: none;
 }
