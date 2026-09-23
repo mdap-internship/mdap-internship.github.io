@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intern Showcase</title>
+    <title>Interns Showcase</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <script>
         (function () {
+            // Lets CSS collapse the mobile menu only when sidebar.js can reopen it.
+            document.documentElement.classList.add('js');
             try {
                 var stored = localStorage.getItem('mdap-theme');
                 document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
@@ -26,6 +28,7 @@
                 <div class="site-masthead-title">
                     <span>Melbourne</span> <span class="highlighted-text">Data Analytics</span><span>Platform</span>
                 </div>
+                <div class="sidebar-actions">
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark and light mode"
                     aria-pressed="false">
                     <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -40,8 +43,20 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
+                <button id="nav-toggle" class="theme-toggle nav-toggle" type="button" aria-label="Toggle navigation menu"
+                    aria-controls="sidebar-nav" aria-expanded="false">
+                    <svg class="icon icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                </div>
             </div>
-            <nav class="sidebar-nav">
+            <nav class="sidebar-nav" id="sidebar-nav">
                 <a href="/" class="nav-link active">Interns Showcase</a>
                 <a href="/cohorts/" class="nav-link">Cohorts</a>
 
@@ -447,7 +462,7 @@
             <main class="main-content">
                 <div class="home-hero">
     <p class="eyebrow">MDAP Internship Program</p>
-    <h1>Intern Showcase</h1>
+    <h1>Interns Showcase</h1>
     <p class="hero-lede">Our internship program has been running for a while now and we already had so many amazing interns working with us! We thought it would nice to showcase your work and know more about you and your journey!</p>
 </div>
 
@@ -3124,6 +3139,7 @@
         </div>
     </div>
     <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/sidebar.js"></script>
 </body>
 
 </html>
