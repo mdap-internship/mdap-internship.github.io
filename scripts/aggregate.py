@@ -21,6 +21,11 @@ PREFIX    = "intern-"
 INTERNS_DIR = Path("interns")
 COHORTS_DIR = Path("cohorts")
 DATA_DIR    = Path("_data")
+# Hand-maintained profiles for interns who predate the template repos.
+# Underscore-prefixed so Jekyll never renders it directly — we copy each
+# entry into INTERNS_DIR below, same as a cloned repo.
+PAST_INTERNS_DIR = Path("_past_interns")
+PHOTO_EXTENSIONS = (".png", ".jpg", ".jpeg")
 
 # Resolved relative to this file, not the current working directory, so it
 # works the same whether run locally from anywhere or from the GitHub runner.
@@ -272,6 +277,78 @@ for repo in intern_repos:
 
     print(f"  OK — slug {slug}, cohort {yr}-{sem}, github: {gh_username or 'unknown'}")
 
+# ── Add past interns (no repo) ────────────────────────────────────────────────
+# Each _past_interns/<slug>/ holds an index.md whose front matter carries the
+# same fields as a template repo's, plus a `date:` that stands in for the repo
+# creation date when working out the cohort. An optional profile-photo.<ext>
+# next to it is moved to assets/img/, where intern-card.html looks for it.
+
+repo_count = len(cohorts)
+past_failures = []
+
+def read_front_matter(path: Path) -> dict:
+    content = path.read_text(encoding="utf-8")
+    if not content.startswith("---"):
+        return {}
+    return yaml.safe_load(content.split("---")[1]) or {}
+
+
+past_dirs = sorted(
+    d for d in PAST_INTERNS_DIR.iterdir()
+    if d.is_dir() and not d.name.startswith(("_", "."))
+) if PAST_INTERNS_DIR.exists() else []
+
+print(f"\nProcessing {len(past_dirs)} past intern(s) from {PAST_INTERNS_DIR}/")
+
+for src in past_dirs:
+    slug = src.name
+    index = src / "index.md"
+    if not index.exists():
+        past_failures.append((slug, "missing index.md"))
+        continue
+    if slug != slugify(slug):
+        past_failures.append((slug, f"folder name must be a lowercase slug, e.g. '{slugify(slug)}'"))
+        continue
+    if slug in cohorts:
+        past_failures.append((slug, "slug already used by an intern repo"))
+        continue
+
+    meta = read_front_matter(index)
+    display_name = str(meta.get("title") or "").strip()
+    date = meta.get("date")
+    if isinstance(date, str):
+        try:
+            date = datetime.fromisoformat(date)
+        except ValueError:
+            date = None
+    if not display_name or not date:
+        past_failures.append((slug, "front matter needs both 'title' and 'date' (YYYY-MM-DD)"))
+        continue
+
+    dest = INTERNS_DIR / slug
+    shutil.copytree(src, dest)
+    for photo in dest.iterdir():
+        if photo.stem == "profile-photo" and photo.suffix.lower() in PHOTO_EXTENSIONS:
+            (dest / "assets" / "img").mkdir(parents=True, exist_ok=True)
+            photo.rename(dest / "assets" / "img" / photo.name)
+
+    sem = semester(date)
+    yr  = semester_year(date)
+    entry = {
+        "username":     slug,
+        "display_name": display_name,
+        "date":         date.isoformat(),
+        "year":         yr,
+        "semester":     sem,
+        "cohort":       f"{yr}-{sem}",
+        "past":         True,
+    }
+    if meta.get("gh_username"):
+        entry["gh_username"] = str(meta["gh_username"])
+    cohorts[slug] = entry
+
+    print(f"  OK — slug {slug}, cohort {yr}-{sem}")
+
 # ── Write hidden metadata ─────────────────────────────────────────────────────
 
 cohorts_path = DATA_DIR / "cohorts.yml"
@@ -307,4 +384,10 @@ if clone_failures:
     for name, err in clone_failures:
         print(f"  - {name}: {err}")
 
-print(f"\nDone. Processed {len(cohorts)}/{len(intern_repos)} repos successfully.")
+if past_failures:
+    print(f"\n{len(past_failures)} past intern(s) skipped:")
+    for name, reason in past_failures:
+        print(f"  - {name}: {reason}")
+
+print(f"\nDone. Processed {repo_count}/{len(intern_repos)} repos and "
+      f"{len(cohorts) - repo_count}/{len(past_dirs)} past interns successfully.")

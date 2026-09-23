@@ -45,10 +45,8 @@
                 <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} active{% endif %}">Interns Showcase</a>
                 <a href="{{ '/cohorts/' | relative_url }}" class="nav-link{% if page.url == '/cohorts/' %} active{% endif %}">Cohorts</a>
 
-                {% assign cohort_entries = "" | split: "" %}
-                {% for entry in site.data.cohorts %}
-                    {% assign cohort_entries = cohort_entries | push: entry[1] %}
-                {% endfor %}
+                {% include intern-entries.html %}
+                {% assign cohort_entries = intern_entries %}
                 {% assign cohort_groups = cohort_entries | group_by: "cohort" | sort: "name" | reverse %}
 
                 {% if cohort_groups.size > 0 %}

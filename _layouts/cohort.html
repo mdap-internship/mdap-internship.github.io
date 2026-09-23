@@ -1,10 +1,8 @@
 ---
 layout: default
 ---
-{% assign cohort_entries = "" | split: "" %}
-{% for entry in site.data.cohorts %}
-    {% assign cohort_entries = cohort_entries | push: entry[1] %}
-{% endfor %}
+{% include intern-entries.html %}
+{% assign cohort_entries = intern_entries %}
 {% assign members = cohort_entries | where: "cohort", page.cohort | sort: "display_name" %}
 
 <div class="cohort-page">

@@ -7,13 +7,11 @@ permalink: /cohorts/
 <div class="cohorts-index">
     <header class="page-header">
         <h1>Cohorts</h1>
-        <p class="page-subtitle">The MDAP internship program has been running for a while but we only started this showcase in 2026, here is a list of all the cohorts since then.</p>
+        <p class="page-subtitle">The MDAP internship program has been running for a while but we only started this showcase in 2026.</p>
     </header>
 
-    {% assign cohort_entries = "" | split: "" %}
-    {% for entry in site.data.cohorts %}
-        {% assign cohort_entries = cohort_entries | push: entry[1] %}
-    {% endfor %}
+    {% include intern-entries.html %}
+    {% assign cohort_entries = intern_entries %}
     {% assign grouped = cohort_entries | group_by: "cohort" | sort: "name" | reverse %}
 
     {% if grouped.size > 0 %}

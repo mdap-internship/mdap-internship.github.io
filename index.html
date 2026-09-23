@@ -10,10 +10,8 @@ permalink: /
     <p class="hero-lede">Our internship program has been running for a while now and we already had so many amazing interns working with us! We thought it would nice to showcase your work and know more about you and your journey!</p>
 </div>
 
-{% assign interns = "" | split: "" %}
-{% for entry in site.data.cohorts %}
-    {% assign interns = interns | push: entry[1] %}
-{% endfor %}
+{% include intern-entries.html %}
+{% assign interns = intern_entries %}
 {% assign years = interns | map: "year" | uniq | sort | reverse %}
 
 {% if years.size > 0 %}

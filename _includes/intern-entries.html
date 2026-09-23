@@ -1,0 +1,10 @@
+{% comment %}
+Flattens _data/cohorts.yml into `intern_entries` (one hash per intern) for
+the including page to use. Past interns (from _past_interns/) are left out
+when _config.yml sets show_past_interns: false.
+{% endcomment %}
+{% assign intern_entries = "" | split: "" %}
+{% for entry in site.data.cohorts %}
+    {% if site.show_past_interns == false and entry[1].past %}{% continue %}{% endif %}
+    {% assign intern_entries = intern_entries | push: entry[1] %}
+{% endfor %}
