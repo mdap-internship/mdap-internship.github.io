@@ -69,8 +69,26 @@
             </nav>
         </aside>
 
+        
+        
         <div class="content-column">
-            <div class="content-bg"></div>
+            <div class="content-bg content-bg--live">
+                
+                    <div class="datawave-canvas" id="datawave-bg" aria-hidden="true"></div>
+<script type="module">
+    import { DataWave } from "/assets/js/datawave.js";
+
+    var target = document.getElementById('datawave-bg');
+    if (target) {
+        var wave = new DataWave(target);
+        // No WebGL: leave the empty container — .content-overlay's own
+        // gradient-over-theme-color still renders a clean fallback.
+        if (!wave.supported) target.remove();
+    }
+</script>
+
+                
+            </div>
             <div class="content-overlay"></div>
             <main class="main-content">
                 
