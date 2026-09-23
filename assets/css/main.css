@@ -1,6 +1,7 @@
 /* ── Theme tokens ─────────────────────────────────────────────────────── */
 
 :root {
+    --sidebar-width: 250px;
     --bg: #ffffff;
     --bg-secondary: #f6f8fa;
     --bg-tertiary: #eef1f4;--border: #d0d7de;
@@ -115,8 +116,11 @@ a:hover {
 }
 
 .sidebar {
-    width: 250px;
+    width: var(--sidebar-width);
     flex-shrink: 0;
+    /* Keeps the sidebar above the fixed background, which on narrow screens
+       spans the full viewport width. */
+    z-index: 1;
     background: var(--bg-secondary);
     border-right: 1px solid var(--border);
     padding: 1.5rem 1rem;
@@ -130,6 +134,17 @@ a:hover {
     display: flex;
     align-items: top;
     justify-content: space-between;
+}
+
+.sidebar-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Mobile-only menu button — shown below the breakpoint when JS is running. */
+.sidebar-actions .nav-toggle,
+.nav-toggle .icon-close {
+    display: none;
 }
 
 .brand {
@@ -207,10 +222,16 @@ a:hover {
 }
 
 /* Background layer — sits behind the gradient overlay so either one can be
-   independently transformed (e.g. blurred) without affecting the other. */
+   independently transformed (e.g. blurred) without affecting the other.
+   Both are pinned to the viewport (minus the sidebar) rather than stretched
+   over the whole page, so long pages don't distort the background. */
+.content-bg,
+.content-overlay {
+    position: fixed;
+    inset: 0 0 0 var(--sidebar-width);
+}
+
 .content-bg {
-    position: absolute;
-    inset: 0;
     z-index: -2;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -220,8 +241,6 @@ a:hover {
 
 /* Semi-transparent gradient overlay — sits on top of .content-bg. */
 .content-overlay {
-    position: absolute;
-    inset: 0;
     z-index: -1;
     pointer-events: none;
     background-repeat: no-repeat;
@@ -314,16 +333,62 @@ a:hover {
 }
 
 @media (max-width: 780px) {
+    :root {
+        --sidebar-width: 0px;
+    }
+
     .layout {
         flex-direction: column;
     }
 
+    /* Collapses to a compact bar pinned to the top; the menu button in
+       .sidebar-actions opens the nav below it (assets/js/sidebar.js). */
     .sidebar {
         width: 100%;
         height: auto;
-        position: static;
+        max-height: 100dvh;
+        top: 0;
+        padding: 0.75rem 1.25rem;
         border-right: none;
         border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+        align-items: center;
+    }
+
+    /* The separator moves from the title to the header, and only shows
+       while the nav is visible, so the buttons don't shift on open. */
+    .sidebar .site-masthead-title {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 0.3em;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    :root:not(.js) .sidebar-header,
+    .sidebar.is-open .sidebar-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .js .nav-toggle {
+        display: inline-flex;
+    }
+
+    .js .sidebar:not(.is-open) .sidebar-nav {
+        display: none;
+    }
+
+    .sidebar.is-open .nav-toggle .icon-menu {
+        display: none;
+    }
+
+    .sidebar.is-open .nav-toggle .icon-close {
+        display: block;
     }
 
     .main-content {

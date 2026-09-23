@@ -89,6 +89,8 @@ export const DEFAULTS = {
   targetZ: -40,
   rotation: -50, // degrees, rotates the whole field around Y
   mouseParallax: 0.8, // world units the camera shifts with the pointer (0 = off)
+  scrollDolly: 6, // world units the camera moves towards its target over a full page scroll (0 = off)
+  scrollRotate: 8, // degrees the field turns over a full page scroll (0 = off)
 
   // Animation & performance
   speed: 0.2,
@@ -313,6 +315,8 @@ export class DataWave {
     this.time = 0;
     this._mouse = [0, 0];
     this._mouseTarget = [0, 0];
+    this._scroll = 0;
+    this._scrollTarget = 0;
     this._last = 0;
     this._raf = 0;
     this._onScreen = true;
@@ -391,6 +395,7 @@ export class DataWave {
     this._io?.disconnect();
     this._motionQuery?.removeEventListener?.("change", this._onMotionChange);
     window.removeEventListener("pointermove", this._onPointer);
+    window.removeEventListener("scroll", this._onScroll);
     document.removeEventListener("visibilitychange", this._onVisibility);
     this.canvas.removeEventListener("webglcontextlost", this._onContextLost);
     this.canvas.removeEventListener("webglcontextrestored", this._onContextRestored);
@@ -431,6 +436,10 @@ export class DataWave {
       this._mouseTarget[0] = (e.clientX / window.innerWidth) * 2 - 1;
       this._mouseTarget[1] = (e.clientY / window.innerHeight) * 2 - 1;
     };
+    this._onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      this._scrollTarget = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+    };
     this._onVisibility = () => this._update();
     this._onMotionChange = () => this._update();
     this._onContextLost = (e) => {
@@ -447,6 +456,9 @@ export class DataWave {
     };
 
     window.addEventListener("pointermove", this._onPointer, { passive: true });
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+    this._scroll = this._scrollTarget; // start where the page is, no ease-in on reload
     document.addEventListener("visibilitychange", this._onVisibility);
     this.canvas.addEventListener("webglcontextlost", this._onContextLost);
     this.canvas.addEventListener("webglcontextrestored", this._onContextRestored);
@@ -579,6 +591,7 @@ export class DataWave {
     const k = Math.min(1, dt * 2.5);
     this._mouse[0] += (this._mouseTarget[0] - this._mouse[0]) * k;
     this._mouse[1] += (this._mouseTarget[1] - this._mouse[1]) * k;
+    this._scroll += (this._scrollTarget - this._scroll) * k;
     this._render();
   };
 
@@ -600,8 +613,10 @@ export class DataWave {
     const py = this._mouse[1] * o.mouseParallax * 0.5;
     const eye = [o.cameraX + px, o.cameraY - py, o.cameraZ];
     const target = [o.targetX, o.targetY, o.targetZ];
+    const dolly = (this._scroll * o.scrollDolly) / (Math.hypot(target[0] - eye[0], target[1] - eye[1], target[2] - eye[2]) || 1);
+    for (let i = 0; i < 3; i++) eye[i] += (target[i] - eye[i]) * dolly;
     const view = lookAt(eye, target);
-    const model = rotationY((o.rotation * Math.PI) / 180);
+    const model = rotationY(((o.rotation + this._scroll * o.scrollRotate) * Math.PI) / 180);
     const proj = perspective(o.fov, width / height, 0.1, 400);
     const refDist = Math.hypot(eye[0] - target[0], eye[1] - target[1], eye[2] - target[2]);
     const viewScale = o.responsiveSize ? this.canvas.clientHeight / 1000 : 1;
