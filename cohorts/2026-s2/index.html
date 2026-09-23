@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jinghan (Ryan) Ruan</title>
+    <title>2026 S2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@
                 <ul class="cohort-nav">
                     
                     <li>
-                        <a href="/cohorts/2026-s2/" class="cohort-nav-link">
+                        <a href="/cohorts/2026-s2/" class="cohort-nav-link active">
                             2026 S2
                         </a>
                     </li>
@@ -112,8 +112,22 @@
 
         
         
-        <div class="content-column no-hero-bg">
-            <div class="content-bg">
+        <div class="content-column">
+            <div class="content-bg content-bg--live">
+                
+                    <div class="datawave-canvas" id="datawave-bg" aria-hidden="true"></div>
+<script type="module">
+    import { DataWave } from "/assets/js/datawave.js";
+
+    var target = document.getElementById('datawave-bg');
+    if (target) {
+        var wave = new DataWave(target);
+        // No WebGL: leave the empty container — .content-overlay's own
+        // gradient-over-theme-color still renders a clean fallback.
+        if (!wave.supported) target.remove();
+    }
+</script>
+
                 
             </div>
             <div class="content-overlay"></div>
@@ -121,65 +135,82 @@
                 
 
 
+    
+    
 
-<article class="intern-profile">
-    <header class="intern-header">
-        <h1>
-            Jinghan (Ryan) Ruan
-            
-        </h1>
-        <p class="intern-role">MDAP Intern</p>
-        <p class="intern-meta">2025 S1 cohort</p>
-        
-        <p class="intern-degree">
-            Master of Information Systems
-            <span class="intern-faculty">(Engineering and Information Technology)</span>
-        </p>
-        
-        
-        <ul class="intern-projects">
-            
-            
-            <li class="intern-project">
-                <span class="intern-project-title">Pacific Ed</span>
-                
-                
-                
-                <span class="intern-project-supervisors">
-                    <span class="intern-project-supervisors-label">Supervised by</span>
-                    <span class="intern-project-supervisors-names">Amanda Belton</span>
-                </span>
-                
-            </li>
-            
-            
-            
-            <li class="intern-project">
-                <span class="intern-project-title">Orygen</span>
-                
-                
-                
-                <span class="intern-project-supervisors">
-                    <span class="intern-project-supervisors-label">Supervised by</span>
-                    <span class="intern-project-supervisors-names">Dr Mel Mistica</span>
-                </span>
-                
-            </li>
-            
-            
-        </ul>
-        
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+<div class="cohort-page">
+    <header class="cohort-header">
+        <p class="cohort-eyebrow">Cohort</p>
+        <h1>2026 &mdash; Semester 2</h1>
+        <p class="cohort-count">1 intern</p>
     </header>
-    <div class="markdown-body">
+    <ul class="intern-list">
         
-
-    </div>
-</article>
+            
 
 
 
 
 
+
+
+<li class="intern-card">
+    <a href="/interns/gabriele-marini-gabryxx7/">
+        
+        <img class="intern-avatar" src="/interns/gabriele-marini-gabryxx7/assets/img/profile-photo.png" alt="Gabriele Marini" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="intern-avatar intern-avatar--initials" style="display:none" aria-hidden="true">G</span>
+        
+        <span class="intern-card-text">
+            <span class="intern-name">Gabriele Marini</span>
+            
+            <span class="intern-card-degree">Master of Data Wrangling</span>
+            
+        </span>
+    </a>
+</li>
+
+        
+    </ul>
+</div>
 
             </main>
         </div>
