@@ -8,8 +8,8 @@ degree: Master of Information Technology
 faculty: Engineering and Information Technology
 # Optional — adds a GitHub link next to their name.
 # gh_username: janedoe
-projects:
-    - title: Project 1
-      supervisors:
-        - Dr Gabriele Marini
+# projects:
+#     - title: Project 1
+#       supervisors:
+#         - Dr Gabriele Marini
 ---

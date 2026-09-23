@@ -1,0 +1,7 @@
+---
+title: Nikhil Varma Gottimukkala
+date: 2020-09-01
+role: MDAP Intern
+degree: Master of Information Systems
+faculty: Engineering and Information Technology
+---

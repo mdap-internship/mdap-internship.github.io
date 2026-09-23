@@ -11,7 +11,7 @@ hero_background: datawave
 # Whether interns added by hand under _past_interns/ (no repo of their own)
 # appear on the home page, cohort pages and sidebar. Set to false to hide
 # them without deleting their folders.
-show_past_interns: false
+show_past_interns: true
 
 defaults:
   - scope:
