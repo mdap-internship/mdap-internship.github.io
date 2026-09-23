@@ -372,7 +372,7 @@ a:hover {
 .hero-lede {
     color: var(--text-secondary);
     font-size: 1.05rem;
-    max-width: 46ch;
+    /* max-width: 46ch; */
     margin: 0 0 1.5rem;
 }
 
