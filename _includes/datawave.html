@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DataWave Tuner</title>
+    <style>
+        :root {
+            --bg: #173a6b;
+            --ink: #f2f5fb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        }
+
+        /* The background layer: fixed, behind everything, CSS colour as no-WebGL fallback */
+        #bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: var(--bg);
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: clamp(24px, 7vw, 96px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            max-width: 760px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5.5vw, 64px);
+            line-height: 1.05;
+            margin: 0 0 16px;
+            font-weight: 650;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 1.6vw, 20px);
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.85;
+            max-width: 52ch;
+        }
+
+        .hero h1,
+        .hero p {
+            text-shadow: 0 1px 12px rgba(10, 25, 50, .6);
+        }
+
+        .hero.hidden {
+            display: none;
+        }
+
+        .stats {
+            position: fixed;
+            left: 12px;
+            bottom: 10px;
+            z-index: 2;
+            font: 12px/1.4 ui-monospace, monospace;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            top: 16px;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: rgba(0, 0, 0, .75);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity .2s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .lil-gui.root {
+            z-index: 5;
+            max-height: calc(100vh - 16px);
+            overflow-y: auto;
+        }
+
+        @media (max-width: 600px) {
+            .lil-gui.root {
+                --width: 100vw;
+                right: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bg"></div>
+
+    <section class="hero" id="hero">
+        <h1>Sample headline over the background</h1>
+        <p>This text shows how the point cloud reads behind real content. Toggle it in the panel.
+            Press <kbd>H</kbd> to hide the panel.</p>
+    </section>
+
+    <div class="stats" id="stats"></div>
+    <div class="toast" id="toast"></div>
+
+    <script type="module">
+        import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
+        import { DataWave, DEFAULTS } from './datawave.js';
+
+        const STORAGE_KEY = 'datawave-tuner-v1';
+        const query = new URLSearchParams(location.search);
+
+        const PALETTES = {
+            Reference: DEFAULTS.gradient,
+            Aurora: [{ pos: 0, color: '#0b2a4a' }, { pos: 0.4, color: '#1d8f9a' }, { pos: 0.7, color: '#5fe0b0' }, { pos: 1, color: '#e8f9a0' }],
+            Sunset: [{ pos: 0, color: '#2a1a5e' }, { pos: 0.35, color: '#8a3ab9' }, { pos: 0.7, color: '#f06a6a' }, { pos: 1, color: '#ffd27a' }],
+            Mono: [{ pos: 0, color: '#3a5f96' }, { pos: 1, color: '#e9f0fa' }],
+        };
+
+        const clone = (o) => JSON.parse(JSON.stringify(o));
+        let params = clone(DEFAULTS);
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+            if (saved && !query.has('reset')) params = { ...params, ...saved };
+        } catch { /* storage unavailable */ }
+
+        const ui = {
+            showSample: query.get('sample') !== '0', transparent: params.background === null,
+            background: params.background || DEFAULTS.background, palette: 'Reference'
+        };
+
+        // ?still renders a single frame (useful for screenshots); ?t=5 sets the time
+        if (query.has('still')) params.paused = true;
+        const wave = new DataWave(document.getElementById('bg'), params);
+        if (query.has('t')) { wave.time = parseFloat(query.get('t')) || 0; wave.setOptions({}); }
+        if (!wave.supported) toast('WebGL is not available in this browser.');
+
+        const hero = document.getElementById('hero');
+        hero.classList.toggle('hidden', !ui.showSample);
+
+        function apply(geometryOrGradient = false) {
+            params.background = ui.transparent ? null : ui.background;
+            document.documentElement.style.setProperty('--bg', ui.transparent ? '#0d1b2e' : ui.background);
+            wave.setOptions(geometryOrGradient ? clone(params) : { ...params, gradient: undefined });
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(params)); } catch { /* ignore */ }
+            updateStats();
+        }
+        const applyAll = () => apply(true);
+
+        // --------------------------------------------------------------- panel
+        const gui = new GUI({ title: 'DataWave' });
+        if (query.get('ui') === '0') gui.hide();
+        const onC = (c, full = false) => c.onChange(full ? applyAll : () => apply());
+
+        const fField = gui.addFolder('Field & density');
+        onC(fField.add(params, 'width', 10, 120, 1), true);
+        onC(fField.add(params, 'depth', 10, 80, 1), true);
+        onC(fField.add(params, 'density', 1, 20, 0.1).name('density (pts/unit)'), true);
+        onC(fField.add(params, 'mobileDensity', 1, 20, 0.1).name('mobile density'), true);
+        onC(fField.add(params, 'jitter', 0, 1, 0.01).name('grid jitter'), true);
+        onC(fField.add(params, 'seed', 1, 999, 1), true);
+        fField.add({ reseed() { params.seed = Math.floor(Math.random() * 998) + 1; gui.controllersRecursive().forEach((c) => c.updateDisplay()); applyAll(); } }, 'reseed').name('🎲 new seed');
+
+        const fWave = gui.addFolder('Waves');
+        onC(fWave.add(params, 'waveAmplitude', 0, 5, 0.01).name('amplitude'));
+        onC(fWave.add(params, 'waveLength', 1, 40, 0.1).name('wavelength'));
+        onC(fWave.add(params, 'waveSpeed', 0, 2, 0.01).name('speed'));
+        onC(fWave.add(params, 'waveSteepness', 0, 1, 0.01).name('steepness'));
+        onC(fWave.add(params, 'waveDirection', -180, 180, 1).name('direction °'));
+        onC(fWave.add(params, 'waveSpread', 0, 90, 1).name('spread °'));
+
+        const fBlend = gui.addFolder('Waves → terrain transition');
+        onC(fBlend.add(params, 'blendStart', 0, 1, 0.01).name('start'));
+        onC(fBlend.add(params, 'blendEnd', 0, 1, 0.01).name('end'));
+        onC(fBlend.add(params, 'blendNoise', 0, 1, 0.01).name('edge irregularity'));
+        onC(fBlend.add(params, 'blendNoiseScale', 0.01, 0.5, 0.005).name('irregularity scale'));
+        onC(fBlend.add(params, 'waveFalloff', 0, 1, 0.01).name('wave falloff'));
+        onC(fBlend.add(params, 'blendFlip').name('flip sides'));
+
+        const fTerrain = gui.addFolder('Terrain noise');
+        onC(fTerrain.add(params, 'terrainAmplitude', 0, 50, 0.05).name('height'));
+        onC(fTerrain.add(params, 'terrainScale', 0.01, 0.5, 0.005).name('frequency'));
+        onC(fTerrain.add(params, 'terrainOctaves', 1, 8, 1).name('octaves'));
+        onC(fTerrain.add(params, 'terrainPersistence', 0.1, 0.9, 0.01).name('persistence'));
+        onC(fTerrain.add(params, 'terrainLacunarity', 1.2, 3.5, 0.01).name('lacunarity'));
+        onC(fTerrain.add(params, 'terrainRidge', 0, 1, 0.01).name('ridged'));
+        onC(fTerrain.add(params, 'terrainSpeed', 0, 0.5, 0.005).name('morph speed'));
+
+        const fDisp = gui.addFolder('XZ displacement & scatter');
+        onC(fDisp.add(params, 'warpAmount', 0, 10, 0.05).name('warp amount'));
+        onC(fDisp.add(params, 'warpScale', 0.01, 0.4, 0.005).name('warp frequency'));
+        onC(fDisp.add(params, 'warpSpeed', 0, 0.5, 0.005).name('warp speed'));
+        onC(fDisp.add(params, 'scatter', 0, 5, 0.01).name('scatter'));
+        onC(fDisp.add(params, 'scatterMotion', 0, 3, 0.01).name('scatter motion'));
+        onC(fDisp.add(params, 'dropout', 0, 1, 0.01).name('dropout'));
+
+        const fPts = gui.addFolder('Points');
+        onC(fPts.add(params, 'pointSize', 0.3, 12, 0.05).name('size (px)'));
+        onC(fPts.add(params, 'sizeRandom', 0, 1, 0.01).name('size variation'));
+        onC(fPts.add(params, 'sizeAttenuation').name('perspective size'));
+        onC(fPts.add(params, 'responsiveSize').name('scale with viewport'));
+        onC(fPts.add(params, 'softness', 0, 1, 0.01));
+        onC(fPts.add(params, 'opacity', 0, 1, 0.01));
+        onC(fPts.add(params, 'blending', ['normal', 'additive']));
+
+        const fCol = gui.addFolder('Colour');
+        fCol.add(ui, 'palette', Object.keys(PALETTES)).name('palette preset').onChange((name) => {
+            params.gradient = clone(PALETTES[name]);
+            buildGradientControls();
+            applyAll();
+        });
+        const fGrad = fCol.addFolder('Gradient stops');
+        onC(fCol.add(params, 'colorBy', ['height', 'depth', 'heightDepth', 'blend', 'heightBlend', 'across']).name('colour by'));
+        onC(fCol.add(params, 'colorMin', -10, 5, 0.05).name('height → start'));
+        onC(fCol.add(params, 'colorMax', -5, 12, 0.05).name('height → end'));
+        onC(fCol.add(params, 'colorNoise', 0, 1, 0.01).name('speckle'));
+        fCol.addColor(ui, 'background').onChange(() => apply());
+        fCol.add(ui, 'transparent').name('transparent canvas').onChange(() => apply());
+        onC(fCol.add(params, 'fogNear', 0, 120, 0.5).name('fade start (dist)'));
+        onC(fCol.add(params, 'fogFar', 1, 160, 0.5).name('fade end (dist)'));
+        onC(fCol.add(params, 'edgeFade', 0, 0.5, 0.005).name('edge fade'));
+
+        function buildGradientControls() {
+            fGrad.controllersRecursive().forEach((c) => c.destroy());
+            params.gradient.sort((a, b) => a.pos - b.pos);
+            params.gradient.forEach((stop, i) => {
+                fGrad.addColor(stop, 'color').name(`stop ${i + 1}`).onChange(applyAll);
+                fGrad.add(stop, 'pos', 0, 1, 0.01).name('  position').onChange(applyAll).onFinishChange(() => { buildGradientControls(); applyAll(); });
+            });
+            fGrad.add({
+                add() {
+                    const g = params.gradient;
+                    const last = g[g.length - 1];
+                    g.push({ pos: 1, color: last.color });
+                    if (g.length > 1) g.forEach((s, i) => { s.pos = +(i / (g.length - 1)).toFixed(2); });
+                    buildGradientControls(); applyAll();
+                }
+            }, 'add').name('＋ add stop');
+            fGrad.add({
+                remove() {
+                    if (params.gradient.length <= 2) return;
+                    params.gradient.pop();
+                    buildGradientControls(); applyAll();
+                }
+            }, 'remove').name('－ remove last stop');
+            fGrad.add({
+                reverse() {
+                    params.gradient = params.gradient.map((s) => ({ pos: +(1 - s.pos).toFixed(3), color: s.color }));
+                    buildGradientControls(); applyAll();
+                }
+            }, 'reverse').name('⇄ reverse');
+        }
+        buildGradientControls();
+
+        const fCam = gui.addFolder('Camera');
+        onC(fCam.add(params, 'fov', 15, 100, 1).name('field of view'));
+        onC(fCam.add(params, 'cameraX', -40, 40, 0.1).name('camera x'));
+        onC(fCam.add(params, 'cameraY', -5, 40, 0.1).name('camera y'));
+        onC(fCam.add(params, 'cameraZ', -10, 80, 0.1).name('camera z'));
+        onC(fCam.add(params, 'targetX', -30, 30, 0.1).name('look at x'));
+        onC(fCam.add(params, 'targetY', -20, 20, 0.1).name('look at y'));
+        onC(fCam.add(params, 'targetZ', -40, 30, 0.1).name('look at z'));
+        onC(fCam.add(params, 'rotation', -180, 180, 1).name('field rotation °'));
+        onC(fCam.add(params, 'mouseParallax', 0, 5, 0.05).name('mouse parallax'));
+
+        const fAnim = gui.addFolder('Animation & performance');
+        onC(fAnim.add(params, 'speed', 0, 4, 0.01).name('global speed'));
+        onC(fAnim.add(params, 'paused'));
+        onC(fAnim.add(params, 'maxFps', 10, 120, 1).name('max fps'));
+        onC(fAnim.add(params, 'maxPixelRatio', 0.5, 3, 0.25).name('max pixel ratio'));
+        onC(fAnim.add(params, 'respectReducedMotion').name('respect reduced motion'));
+
+        const fOut = gui.addFolder('Export');
+        fOut.add(ui, 'showSample').name('show sample content').onChange((v) => hero.classList.toggle('hidden', !v));
+        fOut.add({ copy() { copySnippet(); } }, 'copy').name('📋 copy config (changes only)');
+        fOut.add({ download() { downloadJSON(); } }, 'download').name('⬇ download full config JSON');
+        fOut.add({
+            reset() {
+                try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+                Object.assign(params, clone(DEFAULTS));
+                ui.background = DEFAULTS.background; ui.transparent = false; ui.palette = 'Reference';
+                buildGradientControls();
+                gui.controllersRecursive().forEach((c) => c.updateDisplay());
+                applyAll();
+            }
+        }, 'reset').name('↺ reset to defaults');
+
+        gui.folders.forEach((f, i) => { if (i > 0) f.close(); });
+
+        let panelVisible = query.get('ui') !== '0';
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() !== 'h' || e.target.closest('input, textarea')) return;
+            panelVisible = !panelVisible;
+            gui.show(panelVisible);
+        });
+
+        // --------------------------------------------------------------- export
+        function changedOptions() {
+            const out = {};
+            for (const k of Object.keys(DEFAULTS)) {
+                if (JSON.stringify(params[k]) !== JSON.stringify(DEFAULTS[k])) out[k] = params[k];
+            }
+            return out;
+        }
+        async function copySnippet() {
+            const body = JSON.stringify(changedOptions(), null, 2);
+            const code = `new DataWave(document.getElementById('bg'), ${body});`;
+            try { await navigator.clipboard.writeText(code); toast('Config copied to clipboard'); }
+            catch { console.log(code); toast('Clipboard blocked — config printed to console'); }
+        }
+        function downloadJSON() {
+            const blob = new Blob([JSON.stringify(params, null, 2)], { type: 'application/json' });
+            const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'datawave-config.json' });
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        // --------------------------------------------------------------- misc
+        const stats = document.getElementById('stats');
+        function updateStats() { stats.textContent = `${wave.pointCount.toLocaleString()} points`; }
+        updateStats();
+
+        let toastTimer;
+        function toast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+        }
+
+        apply(true);
+        window.wave = wave; // handy for console tinkering
+    </script>
+</body>
+
+</html>
