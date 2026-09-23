@@ -7,7 +7,7 @@ permalink: /cohorts/
 <div class="cohorts-index">
     <header class="page-header">
         <h1>Cohorts</h1>
-        <p class="page-subtitle">Every MDAP internship cohort, most recent first.</p>
+        <p class="page-subtitle">The MDAP internship program has been running for a while but we only started this showcase in 2026, here is a list of all the cohorts since then.</p>
     </header>
 
     {% assign cohort_entries = "" | split: "" %}
