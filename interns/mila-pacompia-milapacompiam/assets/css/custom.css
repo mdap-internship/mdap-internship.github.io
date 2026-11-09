@@ -1,0 +1,73 @@
+/* Loaded automatically by the MDAP site's intern layout.
+   Uses the site's own variables so light and dark mode both work. */
+
+.mila-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mila-chip {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+a.mila-chip:hover {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+    text-decoration: none;
+}
+
+.mila-chip--plain {
+    color: var(--text-secondary);
+}
+
+.mila-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+
+.mila-card,
+.mila-person {
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow);
+}
+
+.mila-card h3 {
+    margin-top: 0;
+    color: var(--highlighted-text);
+}
+
+.mila-card p:last-child,
+.mila-person p:last-child {
+    margin-bottom: 0;
+}
+
+.mila-people {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.mila-person--lead {
+    border-left: 4px solid var(--accent);
+}
+
+.mila-muted {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name</title>
+    <title>Mila Pacompia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -453,7 +453,7 @@
 <article class="intern-profile">
     <header class="intern-header">
         <h1>
-            Your Name
+            Mila Pacompia
             
             <a class="github-link" href="https://github.com/MilaPacompiaM" target="_blank" rel="noopener">
                 <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -467,8 +467,8 @@
         <p class="intern-meta">2026 S2 cohort</p>
         
         <p class="intern-degree">
-            Master of Data Wrangling
-            <span class="intern-faculty">(Dark Arts)</span>
+            Master of Data Science
+            <span class="intern-faculty">(Science)</span>
         </p>
         
         
@@ -476,27 +476,13 @@
             
             
             <li class="intern-project">
-                <span class="intern-project-title">Project 1</span>
+                <span class="intern-project-title">Migrant Music-Making and Dance in Postwar Australia</span>
                 
                 
                 
                 <span class="intern-project-supervisors">
                     <span class="intern-project-supervisors-label">Supervised by</span>
-                    <span class="intern-project-supervisors-names">Gabriele Marini</span>
-                </span>
-                
-            </li>
-            
-            
-            
-            <li class="intern-project">
-                <span class="intern-project-title">Project 2</span>
-                
-                
-                
-                <span class="intern-project-supervisors">
-                    <span class="intern-project-supervisors-label">Supervised by</span>
-                    <span class="intern-project-supervisors-names">Mel Mistica, Gabriele Marini</span>
+                    <span class="intern-project-supervisors-names">Emily Fitzgerald, Edoardo Tescari, Daniel Russo-Batterham</span>
                 </span>
                 
             </li>
@@ -506,26 +492,93 @@
         
     </header>
     <div class="markdown-body">
-        <p>This will be your very own page!</p>
-
-<p>Make sure your repository is named <code class="language-plaintext highlighter-rouge">intern-your_name</code> (for instance mine would be <code class="language-plaintext highlighter-rouge">intern-gabry</code>) so our website will pick it up automatically. You should be able to rename your repository from GitHub, under Settings. No worries if you forget, I can always go back and change it if needed!</p>
-
-<p>You might have noticed this file has a header at the top with some metadata. Write down the titles and the name of your supervisors for each project. Some of you might be working on more than one project, make sure to remove the extra lines if you don’t need them!</p>
-
-<p>Also make sure to update degree and faculty! These are just for us at MDAP and to showcase the diversity of disciplines from MDAP interns :)</p>
+        <div class="mila-contact">
+  <a class="mila-chip" href="https://github.com/MilaPacompiaM" target="_blank" rel="noopener">GitHub · MilaPacompiaM</a>
+  <a class="mila-chip" href="https://www.linkedin.com/in/TODO-your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+  <span class="mila-chip mila-chip--plain">milapacompiamachaca@gmail.com</span>
+</div>
 
 <h1 id="about-me">About me</h1>
 
-<p>(Optional) Feel free to write a few lines about you, what you’re studying, what you’re passionate about…</p>
+<p>I’m Mila Pacompia, an MDAP intern in Semester 2, 2026. I like working where software engineering meets research: turning messy historical sources into clean, searchable data that researchers can actually explore. I care about well-documented, reproducible pipelines and about tools that are pleasant to use for people who aren’t developers.</p>
 
-<h1 id="interns-report">Intern’s report</h1>
+<h1 id="the-project">The project</h1>
 
-<p>You can always add links like <a href="https://www.unimelb.edu.au/mdap">this</a></p>
+<p><strong>Migrant Music-Making and Dance in Postwar Australia</strong> is a platform for exploring the cultural lives of postwar migrants as they appear in <em>The Good Neighbour</em> (1950–1968), the Department of Immigration’s newspaper for “New Australians”. More than ten thousand migrants are named in its pages. The site lets researchers browse articles, search for features on music, dance and other topics, look up the people mentioned, and see visualisations of migrant journeys.</p>
 
-<p>Remember to change your profile-photo, make sure it’s got the same name <code class="language-plaintext highlighter-rouge">assets/img/profile-photo.png</code>, just replace the one already there as a placeholder!
-<img src="/interns/your-name-milapacompiam/assets/img/profile-photo.png" alt="MDAP-intern identicon profile photo :)" /></p>
+<p>The platform is a Django web app backed by PostgreSQL (with pgvector), plus Celery and Redis for background imports, deployed with Docker.</p>
 
-<p>Remember to make at least 1 commit, otherwise the main website’s repository will not pick up your profile (this is to avoid showing empty profiles on the page)</p>
+<h1 id="what-i-did">What I did</h1>
+
+<div class="mila-grid">
+
+  <div class="mila-card">
+    <h3 id="data-cleaning">Data cleaning</h3>
+    <p>Built a cleanup pipeline that finds and fixes malformed article titles and topics. It writes a report of every record it changes so the results can be reviewed before they’re saved to the database.</p>
+  </div>
+
+  <div class="mila-card">
+    <h3 id="occupations-model">Occupations model</h3>
+    <p>Redesigned how people’s professions are stored. Original job titles became their own <code class="language-plaintext highlighter-rouge">Occupation</code> model, people can now have several occupations, and a mapper groups the titles into categories. I also wrote the data migrations and updated the visualisation of people by occupation.</p>
+  </div>
+
+  <div class="mila-card">
+    <h3 id="people--locations-matching">People ↔ locations matching</h3>
+    <p>Wrote a multi-step pipeline (match people → match locations → persist) that links people in the newspaper to the places they came from or settled in, using fuzzy name matching with a configurable threshold. It can run end-to-end or one step at a time, and it has a dry-run mode and validation.</p>
+  </div>
+
+  <div class="mila-card">
+    <h3 id="duplicate-merging">Duplicate merging</h3>
+    <p>Added tools for finding duplicate people and a merge action in the Django admin, so the research team can combine duplicate records without writing any code.</p>
+  </div>
+
+  <div class="mila-card">
+    <h3 id="semantic-search">Semantic search</h3>
+    <p>Built a vector index that embeds articles, people and locations with a local ONNX model (<code class="language-plaintext highlighter-rouge">bge-small-en-v1.5</code>) and stores the vectors in pgvector, so the site can search by meaning rather than exact words. Long articles are split into chunks, and records that haven’t changed are skipped when the index is rebuilt.</p>
+  </div>
+
+  <div class="mila-card">
+    <h3 id="deployment--docs">Deployment &amp; docs</h3>
+    <p>Updated the Docker setup so the pipelines can run in production, improved list pagination and how search results are displayed, and documented every pipeline with step-by-step instructions for running it locally and on the server.</p>
+  </div>
+
+</div>
+
+<h1 id="supervisors--research-team">Supervisors &amp; research team</h1>
+
+<div class="mila-people">
+
+  <div class="mila-person">
+    <p><strong><a href="https://findanexpert.unimelb.edu.au/profile/196181-emily-fitzgerald">Dr Emily Fitzgerald</a></strong><br />
+<span class="mila-muted">Research Data Specialist, School of Computing and Information Systems</span><br />
+Specialises in research data management, data cleaning and visualisation, and digital mapping, with a focus on Australian historical research.</p>
+  </div>
+
+  <div class="mila-person">
+    <p><strong><a href="https://findanexpert.unimelb.edu.au/profile/428364-edoardo-tescari">Dr Edoardo Tescari</a></strong><br />
+<span class="mila-muted">Senior Research Data Specialist, School of Computing and Information Systems</span><br />
+A computational scientist whose background is in numerical cosmological simulations of the intergalactic medium and early galaxies.</p>
+  </div>
+
+  <div class="mila-person">
+    <p><strong><a href="https://findanexpert.unimelb.edu.au/profile/551741-daniel-russo-batterham">Dr Daniel Russo-Batterham</a></strong><br />
+<span class="mila-muted">Senior Research Fellow, Data Specialist, School of Computing and Information Systems</span><br />
+Works across data science and digital humanities: data visualisation, natural language processing and web development.</p>
+  </div>
+
+</div>
+
+<h3 id="chief-investigator">Chief investigator</h3>
+
+<div class="mila-person mila-person--lead">
+  <p><strong><a href="https://findanexpert.unimelb.edu.au/profile/801980-nicholas-tochka">Associate Professor Nicholas Tochka</a></strong><br />
+<span class="mila-muted">Associate Professor in Music (Ethnomusicology), Melbourne Conservatorium of Music</span><br />
+Leads the research behind the project. His work covers popular music, ethnomusicology, and music and multiculturalism.</p>
+</div>
+
+<h1 id="thanks">Thanks</h1>
+
+<p>Thank you to my supervisors and to the MDAP team for their guidance throughout the internship. Learn more about the program at <a href="https://www.unimelb.edu.au/mdap">MDAP</a>.</p>
 
     </div>
 </article>
@@ -533,6 +586,8 @@
 
 
 
+
+<link rel="stylesheet" href="/interns/mila-pacompia-milapacompiam/assets/css/custom.css">
 
 
             </main>
