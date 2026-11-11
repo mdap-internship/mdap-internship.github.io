@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manish Ghoshal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script>
+        (function () {
+            // Lets CSS collapse the mobile menu only when sidebar.js can reopen it.
+            document.documentElement.classList.add('js');
+            try {
+                var stored = localStorage.getItem('mdap-theme');
+                document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
+            } catch (e) {}
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="site-masthead-title">
+                    <span>Melbourne</span> <span class="highlighted-text">Data Analytics</span><span>Platform</span>
+                </div>
+                <div class="sidebar-actions">
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark and light mode"
+                    aria-pressed="false">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+                        </path>
+                    </svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button id="nav-toggle" class="theme-toggle nav-toggle" type="button" aria-label="Toggle navigation menu"
+                    aria-controls="sidebar-nav" aria-expanded="false">
+                    <svg class="icon icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+                </div>
+            </div>
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <a href="/" class="nav-link">Interns Showcase</a>
+                <a href="/cohorts/" class="nav-link">Cohorts</a>
+
+                
+
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+                
+                
+
+                
+                <ul class="cohort-nav">
+                    
+                    <li>
+                        <a href="/cohorts/2026-s2/" class="cohort-nav-link">
+                            2026 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2026-s1/" class="cohort-nav-link">
+                            2026 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2025-s2/" class="cohort-nav-link">
+                            2025 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2025-s1/" class="cohort-nav-link">
+                            2025 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2024-s2/" class="cohort-nav-link">
+                            2024 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2024-s1/" class="cohort-nav-link">
+                            2024 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2023-s2/" class="cohort-nav-link">
+                            2023 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2023-s1/" class="cohort-nav-link">
+                            2023 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2022-s2/" class="cohort-nav-link">
+                            2022 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2022-s1/" class="cohort-nav-link">
+                            2022 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2021-s2/" class="cohort-nav-link">
+                            2021 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2021-s1/" class="cohort-nav-link">
+                            2021 S1
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2020-s2/" class="cohort-nav-link">
+                            2020 S2
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/cohorts/2020-s1/" class="cohort-nav-link">
+                            2020 S1
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </nav>
+        </aside>
+
+        
+        
+        <div class="content-column no-hero-bg">
+            <div class="content-bg">
+                
+            </div>
+            <div class="content-overlay"></div>
+            <main class="main-content">
+                
+
+
+
+<article class="intern-profile">
+    <header class="intern-header">
+        <h1>
+            Manish Ghoshal
+            
+            <a class="github-link" href="https://github.com/manishghoshal99" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+                </svg>
+                <span>manishghoshal99</span>
+            </a>
+            
+        </h1>
+        <p class="intern-role">Data Scientist</p>
+        <p class="intern-meta">2026 S2 cohort</p>
+        
+        <p class="intern-degree">
+            Master of Data Science
+            <span class="intern-faculty">(Science)</span>
+        </p>
+        
+        
+        <ul class="intern-projects">
+            
+            
+            <li class="intern-project">
+                <span class="intern-project-title">SmartRedact: AI in the Context of Law within the Coroners Court of Victoria</span>
+                
+                
+                
+                <span class="intern-project-supervisors">
+                    <span class="intern-project-supervisors-label">Supervised by</span>
+                    <span class="intern-project-supervisors-names">Eduard Hovy, Mel Mistica</span>
+                </span>
+                
+            </li>
+            
+            
+        </ul>
+        
+    </header>
+    <div class="markdown-body">
+        <h1 id="about-me">About me</h1>
+
+<p><img src="assets/img/profile-photo.jpg" width="240" height="240" alt="Manish Ghoshal" /></p>
+
+<p>I’m a data scientist and AI engineer, which mostly means matrix multiplications. My favourite thing a model can say is that it isn’t sure.</p>
+
+<p>I’m studying a Master of Data Science at the University of Melbourne. I’ve chosen AI for healthcare whenever I could, from a medical chatbot to noise detection for a wearable heart monitor, and along the way I’ve led teams and worked closely with clients. You can find more of my projects on my <a href="https://manish-devfolio.vercel.app/">portfolio website</a>.</p>
+
+<p>Most of what I do for fun comes down to how things work and what they mean. I’ve always been into reverse engineering. I also write and read a lot, philosophy included, and museums pull me in because every painting holds two stories, the one behind it and the one it tells. The rest is play. I play four instruments, keep a music library that refuses to pick a genre, and love basketball, badminton and chess, with a rating over 2000 on chess.com.</p>
+
+<h2 id="what-i-was-looking-for">What I was looking for</h2>
+
+<p>I wanted my final semester to go into research that matters outside the university, on a project bigger than me, where people from different fields each carry a piece. That is how MDAP works. SmartRedact is a project with the Coroners Court of Victoria, on findings that sit between medicine and law, and it brings language technology researchers and software engineers together.</p>
+
+<p>The piece that needed an owner was name linking, working out which names refer to the same person. Researchers have worked on that problem for decades, and it still isn’t fully solved, yet every person’s code name depends on it. It’s the kind of work I’m drawn to, the part of AI that rarely makes the demo but decides whether anyone can trust the result.</p>
+
+<p>I also wanted a semester among people who know far more than I do about things I know little about, and MDAP is full of them. Socrates believed his only advantage was that he didn’t think he knew what he didn’t. Nothing shows you the limits of what you know faster than a room full of specialists.</p>
+
+<h2 id="about-the-project">About the project</h2>
+
+<p>When a coroner investigates a death, the findings can recommend changes that might prevent the next one. Learning from patterns across many findings means reading them, and every finding names the person who died, their family, their doctors and the witnesses. SmartRedact hides those people so the documents can be studied without exposing anyone.</p>
+
+<p>Black bars would hide the people but lose the story, because nobody could tell who spoke to whom. Code names keep it. Each person gets one label that stays the same every time they appear, so the account still reads as a story.</p>
+
+<h3 id="why-it-is-hard">Why it is hard</h3>
+
+<p>One person wears many names. In an invented example, Eleanor Whitfield is later called Mrs Whitfield or just Eleanor, and all three need the same code name. One name also fits many people. Families share a surname, and a finding names the family, so a bare Whitfield could be Eleanor or Rupert, and nothing in the name says which. Link the wrong two and nobody notices.</p>
+
+<p>These choices have to hold across a whole finding, not just one paragraph. The longest findings run far beyond the length that research models for this problem are built to handle, so no off-the-shelf model can read one whole.</p>
+
+<h3 id="what-i-built">What I built</h3>
+
+<p>A tool that links only names written exactly the same way treats Dr Alan Prentice and Dr Prentice, two invented mentions of one doctor, as two different people. I rebuilt the part of the pipeline that decides which mentions belong to the same person. Its rule is strict on purpose. A short name joins a person only when exactly one full name in the document fits it. When a bare surname could belong to two people, the tool does not guess. It leaves the mention flagged for a person to check.</p>
+
+<figure class="sr-demo sr-demo--rule">
+<p class="sr-demo__label">Full names in an invented finding</p>
+<p class="sr-demo__names"><span class="sr-demo__chip sr-demo__p1">Dr Alan Prentice</span> <span class="sr-demo__chip sr-demo__p2">Eleanor Whitfield</span> <span class="sr-demo__chip sr-demo__p3">Rupert Whitfield</span></p>
+<p class="sr-demo__label">Three short names, one rule</p>
+<div class="sr-demo__cases">
+<div class="sr-demo__case">
+<p><span class="sr-demo__chip sr-demo__p1">Dr Prentice</span></p>
+<p class="sr-demo__verdict">Fits one full name, so it joins Dr Alan Prentice under the same code name.</p>
+</div>
+<div class="sr-demo__case">
+<p><span class="sr-demo__chip sr-demo__doubt">Whitfield</span></p>
+<p class="sr-demo__verdict">Fits two, so the tool flags it for a person to decide.</p>
+</div>
+<div class="sr-demo__case">
+<p><span class="sr-demo__chip sr-demo__p4">Dr Prentiss</span></p>
+<p class="sr-demo__verdict">Fits none, so it gets its own code name. A link is missed, but the name stays hidden.</p>
+</div>
+</div>
+<figcaption>
+<p>Matching colours mean the same code name. Every name here is invented.</p>
+</figcaption>
+</figure>
+
+<p>On a whole sentence, the pipeline also finds places and dates and gives them code names of their own.</p>
+
+<figure class="sr-demo">
+<div class="sr-demo__step">
+<p class="sr-demo__label">An invented sentence</p>
+<p class="sr-demo__text">Dr Mara Quill spoke with Tom Quill in Ballarat on 4 May 2025. She said he had left the farm early.</p>
+</div>
+<div class="sr-demo__step sr-demo__step--2">
+<p class="sr-demo__label">What the pipeline finds</p>
+<p class="sr-demo__text"><mark class="sr-demo__p1">Dr Mara Quill</mark> spoke with <mark class="sr-demo__p2">Tom Quill</mark> in <mark class="sr-demo__other">Ballarat</mark> on <mark class="sr-demo__other">4 May 2025</mark>. <mark class="sr-demo__doubt">She</mark> said <mark class="sr-demo__doubt">he</mark> had left the farm early.</p>
+</div>
+<div class="sr-demo__step sr-demo__step--3">
+<p class="sr-demo__label">What it writes</p>
+<p class="sr-demo__text"><span class="sr-demo__chip sr-demo__p1">PERSON_1</span> spoke with <span class="sr-demo__chip sr-demo__p2">PERSON_2</span> in <span class="sr-demo__chip sr-demo__other">LOCATION_1</span> on <span class="sr-demo__chip sr-demo__other">DATE_TIME_1</span>. She said he had left the farm early.</p>
+</div>
+<figcaption>
+<p>Matching colours show which code name replaced which name. The two Quills share a surname but get different code names. She and he stay as written, because two people could fit and the tool does not guess. Every name here is invented.</p>
+</figcaption>
+</figure>
+
+<h3 id="still-flagged-and-that-is-the-point">Still flagged, and that is the point</h3>
+
+<p>A privacy tool is only useful if people can trust what it did. When this one is unsure, it says so, and a person makes the call. The same goes for whole pages. A page the system could not read is marked as not checked, never as clean. Hide the people, keep the story, flag the doubts.</p>
+
+<h2 id="my-role-achievements-and-learnings">My role, achievements and learnings</h2>
+
+<p>I owned the name-linking stage of the pipeline, from choosing the model to designing its rules. I tested it against findings annotated by hand, looked closely at where it went wrong, and documented its limits and known exceptions so others can check them. Then I handed it to the project’s software engineers on a data contract we worked out together, so my part returns exactly what their system expects.</p>
+
+<p>The result is a linking stage that does not guess, with tests that check it and an invented example that anyone can run.</p>
+
+<p>My main technical lesson came from choosing a model. The strongest public model I found for linking names could not be used, because its licence restricted reuse. I now check a model’s licence and test it on my longest documents before I rely on it.</p>
+
+<h2 id="about-my-experience">About my experience</h2>
+
+<p>I arrived wanting to build, and MDAP taught me to check. University gave me useful methods, and the internship asked whether they suited the problem and whether their results could be trusted. Some of the tools I relied on failed without warning, so a finished run stopped being proof that the work was right.</p>
+
+<p>I also learnt to explain the work to different readers. Supervisors and engineers need different things from an update, so I began each one with a plain sentence and kept the detail for whoever needed it. And I learnt to ask early what other people needed from my part, before building it alone.</p>
+
+<p>Orientation warned us to expect early overwhelm, and on day one I got lost finding the meeting room. From then on, I met so many brilliant people, and every one of them was kind and supportive. Each had a speciality I knew little about and a story worth hearing, and they shared both generously while I shared some of mine. Nobody made me feel out of place for asking, and that, together with the fortnightly seminars, made me want to do my best.</p>
+
+<p>My final semester has asked a lot of me. I’ve given it my best, and I’m grateful to everyone who has helped along the way.</p>
+
+<p>Thank you so much to my supervisors, Eduard Hovy and Mel Mistica, for their guidance, and to MDAP for the chance to work on a real problem. Testing my ideas with two experts in the field was the most rewarding part of the internship, and the lesson I will keep is that work is finished when someone else can check it.</p>
+
+<p>If you work with sensitive text, or you just want to talk chess, art or music, I’d love to hear from you on <a href="https://www.linkedin.com/in/manishghoshal99/">LinkedIn</a>.</p>
+
+    </div>
+</article>
+
+
+
+
+
+<link rel="stylesheet" href="/interns/manish-ghoshal-manishghoshal99/assets/css/custom.css">
+
+
+            </main>
+        </div>
+    </div>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/sidebar.js"></script>
+</body>
+
+</html>

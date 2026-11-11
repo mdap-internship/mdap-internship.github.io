@@ -1,0 +1,146 @@
+/* Demo figure on this profile. Every rule is scoped to .sr-demo, and the colours come from
+   the site's own variables, so light and dark mode both work. */
+
+.sr-demo {
+    margin: 1.5rem 0;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    background: var(--bg-tertiary);
+}
+
+.sr-demo p {
+    margin: 0;
+}
+
+.sr-demo__step {
+    position: relative;
+    isolation: isolate;
+    padding: 0.6rem 0.75rem;
+}
+
+/* The lifted panel is a layer behind the row. Only its opacity animates, so its colour
+   still follows the site's light and dark switch. */
+.sr-demo__step::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 8px;
+    background: var(--bg);
+    opacity: 0;
+    animation: sr-demo-focus 12s ease-in-out infinite;
+}
+
+.sr-demo__step--2::before {
+    animation-delay: -8s;
+}
+
+.sr-demo__step--3::before {
+    animation-delay: -4s;
+}
+
+.sr-demo__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.sr-demo__text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.sr-demo mark,
+.sr-demo__chip {
+    color: inherit;
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.sr-demo__chip {
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.sr-demo .sr-demo__p1 {
+    background: rgba(88, 166, 255, 0.26);
+}
+
+.sr-demo .sr-demo__p2 {
+    background: rgba(63, 185, 80, 0.26);
+}
+
+.sr-demo .sr-demo__other {
+    background: rgba(139, 149, 165, 0.25);
+}
+
+.sr-demo .sr-demo__doubt {
+    background: rgba(210, 153, 34, 0.3);
+}
+
+.sr-demo figcaption {
+    padding: 0.5rem 0.75rem 0.25rem;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* The rule figure tests three short names against the full names in an invented finding.
+   It has no rows to lift, so its labels and caption sit flush with the figure's padding. */
+.sr-demo--rule {
+    padding: 1rem 1.1rem;
+}
+
+.sr-demo--rule figcaption {
+    padding: 0.75rem 0 0;
+}
+
+.sr-demo .sr-demo__p3 {
+    background: rgba(163, 113, 247, 0.26);
+}
+
+.sr-demo .sr-demo__p4 {
+    background: rgba(219, 97, 162, 0.26);
+}
+
+.sr-demo .sr-demo__names {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.45rem 0 1rem;
+}
+
+.sr-demo__cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.45rem;
+}
+
+.sr-demo__case {
+    padding: 0.75rem 0.85rem;
+    border-radius: 8px;
+    background: var(--bg);
+}
+
+.sr-demo .sr-demo__verdict {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+/* One row at a time is lifted, in reading order, every four seconds. */
+@keyframes sr-demo-focus {
+    0%, 26% { opacity: 1; }
+    32%, 94% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sr-demo__step::before {
+        animation: none;
+    }
+}
